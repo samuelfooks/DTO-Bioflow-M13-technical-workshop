@@ -129,30 +129,29 @@ Learn to explore, search, and use marine data from the EDITO Data Lake using the
 
 # 🗄️ EDITO Data Storage
 
-<div class="scrollable">
 EDITO Data Lake uses modern cloud storage solutions to host public datasets. These datasets are stored in:
-
-- **S3-compatible storage**: For scalable and efficient access to large datasets.
-- **ARCO formats**: Optimized for analysis-ready workflows.
-
-![EDITO Data Storage](../images/editostoragecatalog.png)
-
-</div>
-
----
-
-
-# 🗄️ EDITO Data Storage
-
-EDITO Data Lake uses modern cloud storage to host analysis-ready data:
 
 - **S3-compatible object storage**
 - **Access via URL, anonymous or secure**
 - High performance, cloud-native data formats
 
-🌐 Explore: [viewer.dive.edito.eu](https://viewer.dive.edito.eu)
+🌐 Explore: [38 million occurrence records](https://datalab.dive.edito.eu/data-explorer?source=https%3A%2F%2Fs3.waw3-1.cloudferro.com%2Femodnet%2Fbiology%2Feurobis_occurrence_data%2Feurobis_occurrences_geoparquet_2024-10-01.parquet&rowsPerPage=25&page=1&columnVisibility=%7B%7D)
 
 ---
+
+### 🗂️ EDITO STAC
+
+EDITO offers a standardized **STAC (SpatioTemporal Asset Catalog)** built on **CMEMS** and **EMODnet** data, designed to integrate diverse marine and environmental datasets.
+
+- 🌍 Based on **OGC STAC API** for easy discovery and access  
+- 🌐 Integrates data from multiple domains (ocean, climate, biodiversity)  
+- 🔎 Search by time, space, type — with direct links to S3-hosted assets  
+- 🤝 Supports both human users and automated workflows  
+
+> A gateway to an **interoperable ocean of FAIR data**
+
+---
+
 # 🌐 What is STAC?
 
 **STAC** = SpatioTemporal Asset Catalog
@@ -192,7 +191,7 @@ Access via URLs: `https://...s3...`
 
 ---
 
-# 🧬 What is ARCO Data?
+#  What is ARCO Data?
 
 **ARCO** = Analysis Ready Cloud Optimized
 
@@ -306,6 +305,12 @@ length(collections$collections)  # how many
 ```
 
 👉 R packages like `arrow`, `sf`, `terra` also help with asset processing.
+
+---
+
+# 🔍 Use the EDITO STAC Search UI
+
+The EDITO STAC front-end viewer [EDITOVIEWER](https://viewer.dive.edito.eu/)
 
 ---
 

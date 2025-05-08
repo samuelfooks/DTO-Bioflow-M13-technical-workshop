@@ -7,7 +7,7 @@ description: From R Markdown to a tutorial live on EDITO
 
 <style>
 /******************
-Refined Digital Twin Ocean Theme with Responsive Scaling
+Enhanced Visual Design with Logos and Watermarks
 ******************/
 :root {
   --background-gradient: linear-gradient(to bottom, #f0faff, #e6f7ff); /* Light ocean gradient */
@@ -17,26 +17,30 @@ Refined Digital Twin Ocean Theme with Responsive Scaling
   --font-family: 'Lato', sans-serif; /* Modern sans-serif font */
   --icon-size: 5vw; /* Responsive icon size */
   --text-size: 3vw; /* Responsive text size */
+  --animation-duration: 1s; /* Animation duration */
 }
 
 section {
   background: var(--background-gradient);
   color: var(--text-color);
   font-family: var(--font-family);
-  padding: 5%; /* Increased padding for larger elements */
+  padding: 5%;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+  border: 2px solid var(--border-color); /* Add border */
+  animation: fadeIn var(--animation-duration) ease-in-out; /* Add fade-in animation */
 }
 
 section::before {
   content: '';
   position: absolute;
   top: 50%;
-  right: 5%;
+  left: 5%;
   transform: translateY(-50%);
-  background: url('./images/editoglobe.png') no-repeat center;
-  background-size: 300px;
+  background: url('./images/copernicus.png') no-repeat center, url('./images/emodnet.png') no-repeat center;
+  background-size: 150px, 150px;
+  background-position: left top, left bottom;
   opacity: 0.1; /* Subtle watermark */
   width: 300px;
   height: 300px;
@@ -62,35 +66,65 @@ h1, h2, h3 {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   z-index: 2;
   position: relative;
-  font-size: var(--text-size); /* Responsive text size */
+  font-size: var(--text-size);
+  animation: slideIn var(--animation-duration) ease-in-out; /* Add slide-in animation */
+}
+
+/******************
+Animations
+******************/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 /******************
 Reusable Scrollable Style
 ******************/
-.scrollable {
-  height: 400px; /* Adjust height as needed */
+/* .scrollable {
+  height: 400px;
   overflow-y: auto;
   border: 1px solid var(--border-color);
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.95); /* Slightly opaque white */
+  background-color: rgba(255, 255, 255, 0.95);
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 2;
   position: relative;
+} */
+.scrollable {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1em;
+  background-color: var(--background-gradient); /* Match slide background */
+  box-shadow: none; /* Remove shadow */
+  font-size: 0.9em;
+  color: var(--text-color); /* Match text color */
 }
-
 /******************
 Responsive Icon and Text Styling
 ******************/
 .icon {
-  font-size: var(--icon-size); /* Responsive icon size */
+  font-size: var(--icon-size);
   display: inline-block;
   vertical-align: middle;
 }
 
 .link-text {
-  font-size: var(--text-size); /* Responsive text size */
+  font-size: var(--text-size);
   font-weight: bold;
   color: var(--accent-color);
 }
@@ -168,11 +202,7 @@ Once your account is created, you will be added as a developer to the following 
 ## demo_stac_query.Rmd [Rmd]()
 <video src="../videos/makeRmd.mp4" controls width="800" allowfullscreen></video>
 
----
 
-# 🔄 Knit Rmd
- 
-<video src="../videos/testRmd.mp4" controls width="800" allowfullscreen></video>
 
 ---
 
@@ -235,22 +265,41 @@ Creating Your First GitHub Repository and Pushing Code [Youtube](https://youtu.b
 
 ---
 
-# 🔗 Test in EDITO
+# ⚙️ Configuring the EDITO Service
 
-- Visit **https://datalab.dive.edito.eu/**
-- Choose a service from 'Service Catalog' for R (ex. R Studio)
-- Launch the Service (configure it, most important put your GitHub repo in)
-- Save the Configuration
-- Test launch
+To configure the EDITO service with your GitHub repository and launch it:
+
+<div class="scrollable">
+
+1. **Access the Service Configuration**  
+  - Choose a service from the Service Catalog
+  - ex. R Studio in the IDEs and **Launch** the configuration.
+
+2. **Add Your GitHub Repository**  
+  - Enter your GitHub repository URL in the `Git Repository` field.
+  - Provide your Git username and email if prompted.
+
+3. **Set Resource Limits**  
+  - Adjust CPU and memory limits as needed (e.g., `1600m` for CPU, `5Gi` for memory).
+
+4. **Save the Configuration**  
+  - Click **Save** to store your settings.
+
+5. **Launch the Service**  
+  - Use the **Launch** button to start the service with your configuration.
+
+6. **Test Your Tutorial**  
+  - Verify that your tutorial runs as expected in the configured environment.
+
+For more details, refer to the [EDITO Datalab Documentation](https://pub.pages.mercator-ocean.fr/edito-infra/edito-tutorials-content/#/).
+</div>
 
 ---
 
-Configuring EDITO service, add GitHub, Launch
-
 <div class="scrollable">
-  <video src="../videos/configuretutorialservice.mp4" controls width="800"></video>
 
-  <video src="../videos/copypassword.mp4" controls width="800"></video>
+  <video src="../videos/configuretutorialservice.mp4" controls width="900"></video>
+
 </div>
 
 ---
@@ -275,9 +324,11 @@ Configuring EDITO service, add GitHub, Launch
 <span style="font-size: 1.5em; font-weight: bold; color: var(--accent-color);">Auto Launch Link:</span>
 <a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=«1600m»&resources.limits.memory=«5Gi»&git.name=«»&git.email=«»&git.repository=«https%3A%2F%2Fgithub.com%2Fsamuelfooks%2Fcontributing-edito»&autoLaunch=true" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Click here to auto-launch the tutorial </a>
 
+
 ---
 
-# 🛠️ Step 5 – Clone the Tutorials Repository
+
+# 🛠️ Clone the Tutorials Repository
 
 <div class="scrollable">
 
