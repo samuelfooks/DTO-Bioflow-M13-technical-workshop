@@ -4,17 +4,14 @@ This repository provides resources and guidelines for contributing to the EDITO 
 
 - **Presentations**: Materials to help you understand and present the platform.
 - **Demos**: Demonstrations showcasing the platform's features and usage.
-- **Basic R Scripts**: Example R scripts to get you started with data analysis and integration.
+- **Basic R Scripts**: Example scripts used to create tutorials and/or services to contribute to the EDITO platform.
 
 ## Repository Structure
 
-- `contributing-edito.md`: Detailed guidelines for contributors.
-- `demo_stac_query.Rmd`: An R Markdown file demonstrating STAC queries.
-- `docker`: Demos for containerizing applications and adding them to EDITO
-- `output/`: Directory containing generated outputs.
-- `screenshots/`: Visual assets for presentations and documentation.
-- `themes/`: Custom themes for presentations.
-- `videos/`: Video tutorials and demonstrations.
+- `add-tutorial/`: Resources and guides on how to add tutorials to the EDITO platform.
+- `add-service/`: Resources and guides on how to add services to the EDITO platform.
+- `images/`: Media assets such as images used in tutorials and presentations.
+- `videos/`: Video tutorials and demonstrations used in presentations.
 
 ## Getting Started
 
@@ -28,8 +25,36 @@ This repository provides resources and guidelines for contributing to the EDITO 
    cd contributing-edito
    ```
 
-3. Follow the instructions in `contributing-edito.md` to start contributing.
+3. Follow the instructions in `add-tutorial/` or `add-service/` to start contributing.
+
+## Requirements
+
+To work with this repository, ensure you have the following installed:
+
+- **npm**: For managing JavaScript dependencies.
+- **npx**: To run Node.js commands.
+- **marp**: For generating presentations from Markdown files.
+- **R**: For running R scripts and creating tutorials.
+- **Docker**: (Optional) To run services using `docker-compose`.
+
+## add-tutorial
+
+To add a tutorial, follow these steps:
+
+1. Navigate to the `add-tutorial/` directory:
+   ```bash
+   cd add-tutorial
+   ```
+
+2. Use the following command to generate the HTML presentation from the Markdown file:
+   ```bash
+   npx @marp-team/marp-cli@latest add-edito-tutorial-slide-deck.md -o add-edito-tutorial-slide-deck.html
+   ```
+
+This will create the `add-edito-tutorial-slide-deck.html` file in the same directory, this is a presentation
+
+3. Follow the instructions to complete your tutorial setup.
 
 ## Contributions
 
-We welcome contributions! Please read the `contributing-edito.md` file for detailed guidelines on how to contribute effectively.
+We welcome contributions! Please read the `add-tutorial/` and `add-service/` directories for detailed guidelines on how to contribute effectively.
