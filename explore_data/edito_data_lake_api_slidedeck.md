@@ -4,17 +4,120 @@ paginate: true
 theme: default
 title: Accessing EDITO Data with the API
 ---
+<style>
+/******************
+Refined Digital Twin Ocean Theme with Responsive Scaling
+******************/
+:root {
+  --background-gradient: linear-gradient(to bottom, #f0faff, #e6f7ff); /* Light ocean gradient */
+  --text-color: #00264d; /* Darker blue text */
+  --accent-color: #005b99; /* Deep blue accents */
+  --border-color: #99ccff; /* Subtle blue border */
+  --font-family: 'Lato', sans-serif; /* Modern sans-serif font */
+  --icon-size: 5vw; /* Responsive icon size */
+  --text-size: 3vw; /* Responsive text size */
+}
+
+section {
+  background: var(--background-gradient);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  padding: 5%; /* Increased padding for larger elements */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  background: url('./images/editoglobe.png') no-repeat center;
+  background-size: 300px;
+  opacity: 0.1; /* Subtle watermark */
+  width: 300px;
+  height: 300px;
+  z-index: 0;
+}
+
+section::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: url('./images/editofish.png'), url('./images/euflag.png');
+  background-repeat: no-repeat;
+  background-size: 50px, 50px;
+  background-position: right bottom, right 60px bottom;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+
+h1, h2, h3 {
+  color: var(--accent-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  position: relative;
+  font-size: var(--text-size); /* Responsive text size */
+}
+
+/******************
+Reusable Scrollable Style
+******************/
+.scrollable {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1em;
+  background-color: var(--background-gradient); /* Match slide background */
+  box-shadow: none; /* Remove shadow */
+  font-size: 0.9em;
+  color: var(--text-color); /* Match text color */
+}
+
+/******************
+Responsive Icon and Text Styling
+******************/
+.icon {
+  font-size: var(--icon-size); /* Responsive icon size */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.link-text {
+  font-size: var(--text-size); /* Responsive text size */
+  font-weight: bold;
+  color: var(--accent-color);
+}
+</style>
 
 # 🌊 Welcome!
 
 ## Hands-On with the EDITO Data API
 
-Learn to explore, search, and use marine data from the EDITO Data Lake using the API.
+Learn to explore, search, and use marine data from the EDITO Data Lake using the API
 
 👨‍🏫 Presented by Samuel Fooks (VLIZ)
 
 ---
 
+# 🌍 What is EDITO?
+
+**EDITO** stands for the **European Digital Twin of the Ocean**.
+
+🧭 It is a European infrastructure to:
+- Integrate marine data, models, and services
+- Support marine policy (e.g. the Green Deal)
+- Help connect EU/national initiatives and citizen science
+
+🌐 Offers:
+- Open API access to curated datasets
+- Analysis-ready formats (Zarr, Parquet, COG)
+- Tools to publish, process, and visualize ocean data
+
+---
 # 🚀 Goals for Today
 
 ✅ Understand what STAC and S3 are  
@@ -24,6 +127,32 @@ Learn to explore, search, and use marine data from the EDITO Data Lake using the
 
 ---
 
+# 🗄️ EDITO Data Storage
+
+<div class="scrollable">
+EDITO Data Lake uses modern cloud storage solutions to host public datasets. These datasets are stored in:
+
+- **S3-compatible storage**: For scalable and efficient access to large datasets.
+- **ARCO formats**: Optimized for analysis-ready workflows.
+
+![EDITO Data Storage](../images/editostoragecatalog.png)
+
+</div>
+
+---
+
+
+# 🗄️ EDITO Data Storage
+
+EDITO Data Lake uses modern cloud storage to host analysis-ready data:
+
+- **S3-compatible object storage**
+- **Access via URL, anonymous or secure**
+- High performance, cloud-native data formats
+
+🌐 Explore: [viewer.dive.edito.eu](https://viewer.dive.edito.eu)
+
+---
 # 🌐 What is STAC?
 
 **STAC** = SpatioTemporal Asset Catalog
@@ -65,7 +194,7 @@ Access via URLs: `https://...s3...`
 
 # 🧬 What is ARCO Data?
 
-**ARCO** = Advanced Research Computing Oceanography
+**ARCO** = Analysis Ready Cloud Optimized
 
 EDITO adopts modern cloud-friendly formats:
 - High performance
@@ -143,7 +272,7 @@ https://api.dive.edito.eu/data/
 📖 Docs: [docs.edito.eu](https://docs.edito.eu)  
 🔐 No auth needed for public data
 
-Try browsing with a tool like [stacindex.org](https://stacindex.org)
+Try browsing with a tool like [radiantearth.github.io/stac-browser](https://radiantearth.github.io/stac-browser/#/https%3A%2F%2Fapi.dive.edito.eu%2Fdata%2F?.language=en)
 
 ---
 
@@ -193,6 +322,15 @@ dataset = ds.dataset("s3://...your-parquet-folder...",
 df = dataset.to_table().to_pandas()
 print(df.head())
 ```
+
+---
+
+# Lets Try it out
+
+A sneak peak at a tutorial
+ 
+# 🔗 View the Full Tutorial
+<a href="../add-service/docker/output/demo_stac_query.html" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Click here to view the full tutorial</a>
 
 ---
 

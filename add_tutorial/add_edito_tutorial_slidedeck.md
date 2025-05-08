@@ -2,7 +2,7 @@
 marp: true
 paginate: true
 title: Contributing an R Tutorial to EDITO Datalab
-description: From R Markdown to Pull Request in 20 minutes
+description: From R Markdown to a tutorial live on EDITO
 ---
 
 <style>
@@ -100,7 +100,7 @@ Responsive Icon and Text Styling
 
 ## Contributing to EDITO Datalab
 
-Learn how to contribute an R tutorial in **just 20 minutes**.
+Learn how to contribute your knowledge to [**DTO Tutorials** ](https://dive.edito.eu/training).
 
 Presented by **Samuel Fooks**  
 _Flanders Marine Institute (VLIZ)_

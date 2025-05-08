@@ -36,7 +36,7 @@ To work with this repository, ensure you have the following installed:
 - **marp**: For generating presentations from Markdown files.
 - **R**: For running R scripts and creating tutorials.
 - **Docker**: (Optional) To run services using `docker-compose`.
-
+- **inotify-tools**: (Optional) To run `watch_presentations.sh`
 ## add-tutorial
 
 To learn how to add a tutorial, follow these steps:
