@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  rstudio:
+    image: rocker/verse:latest
+    container_name: rstudio-demo
+    ports:
+      - "8787:8787"
+    environment:
+      - PASSWORD=demo
+    volumes:
+      - ./demo_stac_query.Rmd:/home/rstudio/demo_stac_query.Rmd
+      - ./output:/home/rstudio/output
+    working_dir: /home/rstudio
+    init: true
+    entrypoint: /bin/bash
+    command: >
+      -c "apt-get -y update && apt-get install -y libudunits2-dev libgdal-dev libgeos-dev libproj-dev && /init"
+
+# Usage:
+# Run `docker-compose up` to start the container and access RStudio.
+# Access RStudio at http://localhost:8787 with username 'rstudio' and password 'demo'.
+# Edit the script in RStudio and render it manually.
