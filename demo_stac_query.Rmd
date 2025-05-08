@@ -122,9 +122,6 @@ if (length(items_query$features) > 0) {
   # Get the Parquet asset
   parquet_asset <- first_item$assets[["parquet"]]$href
 
-  # Override the Parquet asset URL for testing
-  parquet_asset <- 'https://s3.waw3-1.cloudferro.com/emodnet/emodnet_biology/12639/eurobis_obisenv_view_2025-03-20.parquet'
-
   if (!is.null(parquet_asset)) {
     # Open the Parquet asset directly from S3 using the arrow package
     options(timeout = 120)

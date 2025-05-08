@@ -25,7 +25,8 @@ By the end of this session, you’ll know how to:
 
 ✅ Create an R tutorial with `.Rmd`  
 ✅ Share it publicly via **GitHub**  
-✅ Launch it on **EDITO Datalab**  
+✅ Launch it on **EDITO Datalab**
+✅ Become a contributor to the EDITO tutorials
 ✅ Register it using `tutorials.json`  
 ✅ Submit a **merge request**
 
@@ -84,7 +85,8 @@ git init
 
 # Add all files to the staging area
 git add .
-
+git config user.name username
+git config user.email usermail@mail.com
 # Commit the changes
 git commit -m "Initial commit"
 
@@ -106,8 +108,15 @@ Replace `username` and `repo-name` with your GitHub username and repository name
 
 - Visit **https://datalab.dive.edito.eu/**
 - Choose a service from 'Service Catalog' for R (ex. R Studio)
-- Launch the Service
+- Launch the Service (configure it, most imporant put your github repo in)
+- Save the Configuration
+- Test launch
+
+
+# 
+# 🔗 Get the Launch Link
 ➡️ Pas
+
 📂 Choose the default file to open
 🔗 Copy the launch link
 
