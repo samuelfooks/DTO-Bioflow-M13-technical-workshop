@@ -197,12 +197,12 @@ Once your account is created, you will be added as a developer to the following 
   - Add visualizations, tables, or outputs
 
 ---
-# 🧱 Example Tutorial Accessing EDITO STAC
 
-## demo_stac_query.Rmd [Rmd]()
+# 🧱 Tutorial Accessing EDITO STAC
+
+## [demo_stac_query.Rmd](https://github.com/samuelfooks/contributing-edito/blob/main/add_tutorial/demo_stac_query.Rmd)
+
 <video src="../videos/makeRmd.mp4" controls width="800" allowfullscreen></video>
-
-
 
 ---
 
