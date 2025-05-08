@@ -2,7 +2,7 @@
 
 This repository provides resources and guidelines for contributing to the EDITO platform. It includes:
 
-- **Presentations**: Materials to help you understand and present the platform.
+- **Presentations**: Markdown files that can be rendered using Marp.
 - **Demos**: Demonstrations showcasing the platform's features and usage.
 - **Basic R Scripts**: Example scripts used to create tutorials and/or services to contribute to the EDITO platform.
 
@@ -39,7 +39,7 @@ To work with this repository, ensure you have the following installed:
 
 ## add-tutorial
 
-To add a tutorial, follow these steps:
+To learn how to add a tutorial, follow these steps:
 
 1. Navigate to the `add-tutorial/` directory:
    ```bash
