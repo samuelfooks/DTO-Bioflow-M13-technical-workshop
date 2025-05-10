@@ -18,14 +18,14 @@ html: $(HTML_FILES)
 
 $(OUTPUT_DIR)/%.html: $(SOURCE_DIR)/%.md
 	mkdir -p $(dir $@)
-	npx @marp-team/marp-cli@latest $< --theme-set $(ASSETS_DIR)/common.css --html --output $@
+	npx @marp-team/marp-cli@latest $< --theme-set $(ASSETS_DIR)/common.css --html --allow-local-files --output $@
 
 # Rule to convert Markdown to PDF
 pdf: $(PDF_FILES)
 
 $(OUTPUT_DIR)/%.pdf: $(SOURCE_DIR)/%.md
 	mkdir -p $(dir $@)
-	npx @marp-team/marp-cli@latest $< --theme-set $(ASSETS_DIR)/common.css --pdf --output $@
+	npx @marp-team/marp-cli@latest $< --theme-set $(ASSETS_DIR)/common.css --pdf --allow-local-files --output $@
 
 # Clean up generated files
 clean:

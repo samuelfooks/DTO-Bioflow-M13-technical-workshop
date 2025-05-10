@@ -1,0 +1,236 @@
+---
+title: "Reading and Plotting Parquet"
+author: "Sam"
+output: html_document
+description: "Read and plot Parquet files using R"
+editor_options: 
+  chunk_output_type: inline
+  highlight: "zenburn"
+  theme: "default"
+  line_numbers: TRUE
+  prompt: FALSE
+  width: 100%
+  height: 100%
+  font_size: 12
+  font_family: "Courier New"
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+# Install required packages if not already installed
+if (!requireNamespace("arrow", quietly = TRUE)) {
+  install.packages("arrow")
+}
+if (!requireNamespace("leaflet", quietly = TRUE)) {
+  install.packages("leaflet")
+}
+if (!requireNamespace("DT", quietly = TRUE)) {
+  install.packages("DT")
+}
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  install.packages("dplyr")
+}
+if (!requireNamespace("sf", quietly = TRUE)) {
+  install.packages("sf")
+}
+if (!requireNamespace("leaflet.extras", quietly = TRUE)) {
+  install.packages("leaflet.extras")
+}
+
+library(arrow)
+library(leaflet)
+library(DT)
+library(dplyr)
+library(sf)
+library(leaflet.extras)
+```
+
+## Provide the Parquet File URL
+
+Please provide the URL to the Parquet file you want to load.
+
+```{r user-input, echo=TRUE}
+# Replace this with the URL to your Parquet file
+parquet_url <- "https://example.com/path/to/your/parquet/file.parquet"
+cat("Using Parquet file URL:", parquet_url, "\n")
+```
+
+## Define a Function to Open the Parquet File
+
+```{r open-parquet-function}
+open_my_parquet <- function(parquet_url) {
+  # Parse the URL to extract the endpoint and path
+  temp <- strsplit(parquet_url, "//")[[1]][2]  # Remove 'https://'
+  endpoint <- strsplit(temp, "/")[[1]][1]  # Extract endpoint
+  data_path <- sub(paste0(endpoint, "/"), "", temp)  # Extract path
+
+  # Create the S3FileSystem connection
+  data_lake <- S3FileSystem$create(anonymous = TRUE, 
+                                   scheme = "https",
+                                   endpoint_override = endpoint)
+
+  # Try to open the dataset and handle any errors
+  dataset <- NULL
+  tryCatch({
+    dataset <- arrow::open_dataset(data_path, filesystem = data_lake, format = "parquet")
+  }, error = function(e) {
+    cat("Error loading dataset:", e$message, "\n")
+  })
+
+  # Return the dataset (or NULL if loading failed)
+  return(dataset)
+}
+```
+
+## Load and Display the Parquet Dataset
+
+```{r load-parquet}
+# Open the Parquet file
+options(timeout = 120)
+parquet_data <- open_my_parquet(parquet_url)
+
+if (!is.null(parquet_data)) {
+  print(parquet_data$schema)
+  print(head(parquet_data))
+} else {
+  cat("Failed to load the Parquet dataset.\n")
+}
+```
+
+## Convert the Parquet Dataset to a Dataframe
+
+```{r convert-parquet-to-dataframe}
+# Convert the Parquet dataset to a dataframe and display the first 100,000 rows
+if (!is.null(parquet_data)) {
+  parquet_df <- as.data.frame(parquet_data[1:100000, ])
+
+  # Display the first few rows of the dataframe
+  print(head(parquet_df))
+} else {
+  cat("No Parquet dataset available to convert to a dataframe.\n")
+}
+```
+
+## Query and Filter the Dataset
+
+```{r filter-aphiaids-efficient}
+if (!is.null(parquet_data)) {
+  # Use arrow's dplyr interface to count aphiaid frequencies directly
+  aphiaid_counts <- parquet_data %>%
+    group_by(aphiaid) %>%
+    summarise(count = n()) %>%
+    arrange(desc(count)) %>%
+    collect()
+
+  # Get the top 5 aphiaids
+  top_aphiaids <- aphiaid_counts$aphiaid[1:5]
+
+  # Filter the dataset for the 3rd, 4th, and 5th most frequent aphiaids
+  filtered_data <- parquet_data %>%
+    filter(aphiaid %in% top_aphiaids[3:5]) %>%
+    collect()
+
+  # Display the filtered dataframe
+  print(head(filtered_data))
+} else {
+  cat("No Parquet dataset available to filter.")
+}
+```
+
+## Display the Filtered Data as an Interactive Table
+
+```{r display-interactive-table}
+if (exists("filtered_data") && nrow(filtered_data) > 0) {
+  # Sample a subset of the data if it is too large
+  if (nrow(filtered_data) > 10000) {
+    filtered_data <- filtered_data[sample(1:nrow(filtered_data), 10000), ]
+  }
+
+  # Display the filtered dataframe as an interactive table using the DT package
+  datatable(
+    filtered_data,
+    options = list(
+      pageLength = 10,
+      scrollX = TRUE
+    )
+  )
+} else {
+  cat("No filtered dataset available to display as a table.\n")
+}
+```
+
+## Display Geometries on a Leaflet Map
+
+```{r display-geometries-leaflet-interactive}
+if (exists("filtered_data") && nrow(filtered_data) > 0) {
+  # Check if the dataframe contains geometry information
+  if ("geometry" %in% colnames(filtered_data)) {
+    # Detect and decode geometry column
+    if (is.character(filtered_data$geometry)) {
+      # If geometry is in WKT format, use it directly
+      sf_data <- st_as_sf(filtered_data, wkt = "geometry")
+    } else if (inherits(filtered_data$geometry[[1]], "raw")) {
+      # If geometry is in WKB format, decode it
+      filtered_data$geometry <- lapply(filtered_data$geometry, function(x) {
+        st_as_text(st_as_sfc(list(x), EWKB = TRUE))
+      })
+      sf_data <- st_as_sf(filtered_data, wkt = "geometry")
+    } else {
+      stop("Unsupported geometry format.")
+    }
+
+    # Simplify geometries to reduce memory usage
+    sf_data <- st_simplify(sf_data, dTolerance = 0.01)
+
+    # Sample a subset of the data if it is too large
+    if (nrow(sf_data) > 10000) {
+      sf_data <- sf_data[sample(1:nrow(sf_data), 10000), ]
+    }
+
+    # Separate polygon and point geometries
+    polygon_data <- sf_data[st_geometry_type(sf_data) %in% c("POLYGON", "MULTIPOLYGON"), ]
+    point_data <- sf_data[st_geometry_type(sf_data) %in% c("POINT", "MULTIPOINT"), ]
+
+    # Create a Leaflet map with interactive features
+    leaflet_map <- leaflet() %>%
+      addTiles()
+
+    # Add polygons if they exist
+    if (nrow(polygon_data) > 0) {
+      leaflet_map <- leaflet_map %>%
+        addPolygons(data = polygon_data, color = "blue", weight = 1, fillOpacity = 0.5, group = "Polygons")
+    }
+
+    # Add points if they exist
+    if (nrow(point_data) > 0) {
+      leaflet_map <- leaflet_map %>%
+        addCircleMarkers(data = point_data, radius = 5, color = "red", group = "Points")
+    }
+
+    # Add interactive features
+    leaflet_map <- leaflet_map %>%
+      addLayersControl(
+        overlayGroups = c("Polygons", "Points"),
+        options = layersControlOptions(collapsed = FALSE)
+      ) %>%
+      addDrawToolbar(
+        targetGroup = "Selected",
+        editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions())
+      ) %>%
+      addMeasure(
+        position = "topright",
+        primaryLengthUnit = "meters",
+        primaryAreaUnit = "sqmeters",
+        activeColor = "#3D535D",
+        completedColor = "#7D4479"
+      )
+
+    # Print the map
+    print(leaflet_map)
+  } else {
+    cat("No geometry column found in the filtered dataset.\n")
+  }
+} else {
+  cat("No filtered dataset available to display geometries.\n")
+}
+```

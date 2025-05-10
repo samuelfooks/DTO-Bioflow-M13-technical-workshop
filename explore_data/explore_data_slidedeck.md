@@ -189,9 +189,9 @@ EMODnet -> Biodiversity -> Occurrence data ->  Occurrence data eurobis database 
 
 ---
 
-## [DEMO Using STAC Viewer](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/usingEDITOSTACviewer.mp4)
-<!-- <img src="https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/images/usingEDITOSTACviewer.png"></img> -->
-  <img src="../assets/images/usingEDITOSTACviewer.png"></img>
+## [DEMO Using STAC Viewer](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/raw/refs/heads/main/assets/videos/usingEDITOSTACviewer.mp4)
+<img src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/usingEDITOSTACviewer.png?raw=true"></img>
+
 Can also view in your browser [radiantearth.github.io/stac-browser](https://radiantearth.github.io/stac-browser/#/https%3A%2F%2Fapi.dive.edito.eu%2Fdata%2F?.language=en)
 
 ---
@@ -270,7 +270,7 @@ print(df.head())
 # Lets Explore the EDITO STAC, find an ARCO dataset from Biodiversity
 
 
-### 🔗 <a href="https://raw.githubusercontent.com/samuelfooks/contributing-edito/refs/heads/main/add_tutorial/demo_stac_query.Rmd" style="font-size: 1em; text-decoration: none; color: var(--text-color);">Tutorial</a>
+### [viewer.dive.edito.eu](https://viewer.dive.edito.eu/)
 
 ---
 

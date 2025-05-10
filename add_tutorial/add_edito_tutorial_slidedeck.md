@@ -11,9 +11,9 @@ class: lead
 
 ## Contributing to EDITO Datalab
 
-Learn how to contribute your knowledge to [**DTO Tutorials** ](https://dive.edito.eu/training).
+Learn how to contribute your knowledge to [**EDITO Tutorials** ](https://dive.edito.eu/training).
 
-<img src="../assets/images/editotutorialspage.png">Tutorials</img>
+<img src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/editotutorialspage.png?raw=true">Tutorials</img>
 Presented by **Samuel Fooks**  
 _Flanders Marine Institute (VLIZ)_
 
@@ -75,18 +75,15 @@ Once your account is created, you will be added as a developer to the following 
 
 ---
 
-# 🧱 Example: Tutorial Accessing EDITO STAC
+# 🧱 Example: My Tutorial on Accessing EDITO STAC
 
-## Here in this repository /add_tutorial/my_stac_r_tutorial/stac_r_tutorial.Rmd
+#### Here in this repository 
 
-### [stac_r_tutorial.Rmd](https://github.com/samuelfooks/contributing-edito/blob/main/add_tutorial/my_stac_r_tutorial/stac_r_tutorial.Rmd)
+##### [/add_tutorial/my_stac_r_tutorial/stac_r_tutorial.Rmd](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_tutorial/my_stac_r_tutorial/stac_r_tutorial.Rmd)
 
-🎬 [Video making Rmd](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/makeRmd.mp4)
-<video src="../assets/videos/makeRmd.mp4" controls width="800" allowfullscreen></video>
-
+<img src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/makingRmdtutorial.png?raw=true" alt="Making Rmd" />
 
 ---
-
 
 # 📂 Recommended Folder Structure
 
@@ -116,8 +113,6 @@ Creating Your First GitHub Repository and Pushing Code [Youtube](https://youtu.b
 ---
 
 # 💻 Push Your Local Code to Your Github
-<!-- fit -->
-<!-- <div class="scrollable"> -->
 
 ```bash
 # Initialize Git in your local directory (if not already initialized)
@@ -138,22 +133,20 @@ git push -u origin main
 
 Creating Your First GitHub Repository and Pushing Code [Youtube](https://youtu.be/f26KI43FK58)
 
-<!-- </div> -->
-
 ---
 
 # ⚙️ Make your deployment URL
 
 [EDITO Services](https://datalab.dive.edito.eu/catalog/All)
 
-1. **Access the Service Configuration**  
+**Access the Service Configuration**  
   - Choose a service from the Service Catalog appropriate for your Tutorial
   - ex. R Studio, Jupyter-python
 
-2. **Add Your GitHub Repository**  
+**Add Your GitHub Repository**  
   - In the `GIT` section add the url to your tutorial's github repository in the Repository field
 
-3. **Set Resource Limits**  
+**Set Resource Limits**  
   - In the resources section, adjust CPU and memory limits as needed 
   - e.g., `1600m` for CPU, `5Gi` for memory
 
@@ -161,35 +154,25 @@ Creating Your First GitHub Repository and Pushing Code [Youtube](https://youtu.b
 
 # Save Configuration and Test your tutorial
 
-4. **Save the Configuration**  
+**Save the Configuration**  
   - Click **Save** to store your settings. 
-  - You will need this URL for the Deployment URL to add your tutorial later
 
-5. **Launch the Service**  
+**Copy the URL in your brower**
+  - This is the link used to deploy your service and clone your github into the service
+
+**Launch the Service**  
   - Use the **Launch** button to start the service with your configuration.
 
-6. **Test Your Tutorial**  
-  - Verify that your tutorial runs as expected in the configured environment.
+**Test Your Tutorial**  
+  - Verify that the service clones your github, and your tutorial can be run
+  - Does it install the right packages? 
+  - Does it produces the outputs you expect?
 
 ---
 
-<div class="scrollable">
+### [Configuring EDITO Service](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/raw/refs/heads/main/assets/videos/configuretutorialservice.mp4)
 
-  ### [Configuring EDITO Service](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/configuretutorialservice.mp4)
-  <video src="../assets/videos/configuretutorialservice.mp4" controls width="900"></video>
-
-</div>
-
----
-
-# Test My Tutorial Service
-
-- <span style="color: var(--accent-color); font-size: 1.2em;">🚀</span> **Ran Everything**
-- <span style="color: var(--accent-color); font-size: 1.2em;">✅</span> **Checked Output**
-- <span style="color: var(--accent-color); font-size: 1.2em;">⚙️</span> <strong>Chosen Configuration Options</strong>:
-  - <span style="color: var(--accent-color); font-size: 1.2em;">🔗</span> <strong><a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=1600m&resources.limits.memory=5Gi&git.name=&git.email=&git.repository=https%3A%2F%2Fgithub.com%2Fsamuelfooks%2Fcontributing-edito" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Configuration Link</a></strong>:  
-    Allows users to configure how the service launches
-  - <span style="color: var(--accent-color); font-size: 1.2em;">🚀</span> <strong><a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=«1600m»&resources.limits.memory=«5Gi»&git.name=«»&git.email=«»&git.repository=«https%3A%2F%2Fgithub.com%2Fsamuelfooks%2Fcontributing-edito»&autoLaunch=true" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Autolaunch Link</a></strong>: Launches the configuration you save
+<video src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/raw/refs/heads/main/assets/videos/configuretutorialservice.mp4" controls width="900"></video>
 
 ---
 
@@ -219,8 +202,8 @@ We will clone this repository and add our tutorial to this list, using the the t
 
 ---
 
-### [Cloning EDITO Tutorials Content](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/clonetutorialscontent.mp4)
-<video src="../assets/videos/clonetutorialscontent.mp4" controls width="800"></video>
+### [Cloning EDITO Tutorials Content](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/videos/clonetutorialscontent.mp4?raw=true)
+<video src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/videos/clonetutorialscontent.mp4?raw=true" controls width="800"></video>
 
 ---
 
@@ -241,14 +224,14 @@ We will clone this repository and add our tutorial to this list, using the the t
 
 ---
 
-  ### [Make branch](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/makenewbranch.mp4)
-  <video src="../assets/videos/makenewbranch.mp4" controls width="800"></video>
+  ### [Make branch](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/videos/makenewbranch.mp4?raw=true)
+  <video src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/videos/makenewbranch.mp4?raw=true" controls width="800"></video>
 
 ---
 
 ## Add your tutorial to 'tutorials.json'
 
-<span style="color: var(--accent-color); font-size: 1.2em;">🔗</span> <strong><a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=1600m&resources.limits.memory=5Gi&git.name=&git.email=&git.repository=https%3A%2F%2Fgithub.com%2Fsamuelfooks%2Fcontributing-edito" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Deployment URL from previous step</a></strong>
+<span style="color: var(--accent-color); font-size: 1.2em;">🔗</span> <strong><a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=1600m&resources.limits.memory=5Gi&git.name=&git.email=&git.repository=https%3A%2F%2Fgithub.com%2Fsamuelfooks%2FDTO-Bioflow-M13-technical-workshop" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Deployment URL from previous step</a></strong>
 
 <!--- fit -->
 ```json
@@ -284,8 +267,8 @@ We will clone this repository and add our tutorial to this list, using the the t
 
 ---
 
-### [Adding to tutorials.json](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/addtutorial.mp4)
-  <video src="../assets/videos/addtutorialjson.mp4" controls width="800"></video>
+### [Adding to tutorials.json](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/videos/addtutorialjson.mp4?raw=true)
+  <video src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/videos/addtutorialjson.mp4?raw=true" controls width="800"></video>
 
 ---
 
