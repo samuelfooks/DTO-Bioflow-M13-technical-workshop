@@ -1,0 +1,31 @@
+name: Build Documentation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Pandoc
+      run: sudo apt-get install -y pandoc
+
+    - name: Build HTML and PDF
+      run: make all
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add docs/
+        git commit -m "Update documentation [skip ci]" || echo "No changes to commit"
+        git push

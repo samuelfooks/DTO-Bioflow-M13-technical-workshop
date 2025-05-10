@@ -1,17 +1,21 @@
 # Contributing to the EDITO Platform
 
-This repository provides resources and guidelines for contributing to the EDITO platform. It includes:
+This repository provides resources and guidelines for contributing to the EDITO platform. It demonstrates how to:
 
-- **Presentations**: Markdown files that can be rendered using Marp.
-- **Demos**: Demonstrations showcasing the platform's features and usage.
-- **Basic R Scripts**: Example scripts used to create tutorials and/or services to contribute to the EDITO platform.
+- **Add a Tutorial**: Learn how to create and contribute tutorials to the EDITO platform.
+- **Explore the Data API**: Understand how to interact with and explore the EDITO Data API.
+- **Add a Service**: Learn how to add custom services to the EDITO platform.
 
 ## Repository Structure
 
-- `add-tutorial/`: Resources and guides on how to add tutorials to the EDITO platform.
-- `add-service/`: Resources and guides on how to add services to the EDITO platform.
-- `images/`: Media assets such as images used in tutorials and presentations.
-- `videos/`: Video tutorials and demonstrations used in presentations.
+- `add_tutorial/`: Resources and guides on how to add tutorials to the EDITO platform.
+- `add_service/`: Resources and guides on how to add services to the EDITO platform.
+- `explore_data/`: Resources for exploring the EDITO Data API.
+- `assets/`: Shared assets used across the repository.
+  - `assets/images/`: Media assets such as images used in tutorials and presentations.
+  - `assets/videos/`: Video tutorials and demonstrations used in presentations.
+- `docs/`: Automatically generated documentation, including HTML and PDF presentations.
+- `data/`: Example data files and scripts for tutorials and services.
 
 ## Getting Started
 
@@ -25,36 +29,32 @@ This repository provides resources and guidelines for contributing to the EDITO 
    cd contributing-edito
    ```
 
-3. Follow the instructions in `add-tutorial/` or `add-service/` to start contributing.
+3. Install the required dependencies:
+   ```bash
+   npm install -g @marp-team/marp-cli
+   ```
+
+4. Generate the documentation:
+   ```bash
+   make all
+   ```
+
+This will create the HTML and PDF files in the `docs/` directory.
 
 ## Requirements
 
-To work with this repository, ensure you have the following installed:
+To work with this repository and generate documentation locally, ensure you have the following installed:
 
+- **Node.js**: For running JavaScript-based tools.
 - **npm**: For managing JavaScript dependencies.
 - **npx**: To run Node.js commands.
 - **marp**: For generating presentations from Markdown files.
 - **R**: For running R scripts and creating tutorials.
 - **Docker**: (Optional) To run services using `docker-compose`.
-- **inotify-tools**: (Optional) To run `watch_presentations.sh`
-## add-tutorial
-
-To learn how to add a tutorial, follow these steps:
-
-1. Navigate to the `add-tutorial/` directory:
-   ```bash
-   cd add-tutorial
-   ```
-
-2. Use the following command to generate the HTML presentation from the Markdown file:
-   ```bash
-   npx @marp-team/marp-cli@latest add-edito-tutorial-slide-deck.md -o add-edito-tutorial-slide-deck.html
-   ```
-
-This will create the `add-edito-tutorial-slide-deck.html` file in the same directory, this is a presentation
-
-3. Follow the instructions to complete your tutorial setup.
+- **inotify-tools**: (Optional) To run `watch_presentations.sh` for live updates.
 
 ## Contributions
 
-We welcome contributions! Please read the `add-tutorial/` and `add-service/` directories for detailed guidelines on how to contribute effectively.
+We welcome contributions! Please read the `add_tutorial/`, `add_service/`, and `explore_data/` directories for detailed guidelines on how to contribute effectively.
+
+If you encounter any issues or have suggestions, feel free to open an issue or submit a pull request.

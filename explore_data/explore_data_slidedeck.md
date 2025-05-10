@@ -1,10 +1,10 @@
 ---
 marp: true
 paginate: true
-theme: default
+theme: edito-tutorials
 title: Accessing EDITO Data with the API
 ---
-<style>
+<!-- <style>
 /******************
 Refined Digital Twin Ocean Theme with Responsive Scaling
 ******************/
@@ -34,7 +34,7 @@ section::before {
   top: 50%;
   right: 5%;
   transform: translateY(-50%);
-  background: url('./images/editoglobe.png') no-repeat center;
+  background: url('./assets/images/editoglobe.png') no-repeat center;
   background-size: 300px;
   opacity: 0.1; /* Subtle watermark */
   width: 300px;
@@ -47,7 +47,7 @@ section::after {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background: url('./images/editofish.png'), url('./images/euflag.png');
+  background: url('./assets/images/editofish.png'), url('./assets/images/euflag.png');
   background-repeat: no-repeat;
   background-size: 50px, 50px;
   background-position: right bottom, right 60px bottom;
@@ -91,13 +91,13 @@ Responsive Icon and Text Styling
   font-weight: bold;
   color: var(--accent-color);
 }
-</style>
+</style> -->
 
 # 🌊 Welcome!
 
 ## Hands-On with the EDITO Data API
 
-Learn to explore, search, and use marine data from the EDITO Data Lake using the API
+Learn to explore, search, and use marine data from the EDITO Data Lake
 
 👨‍🏫 Presented by Samuel Fooks (VLIZ)
 
@@ -117,13 +117,14 @@ Learn to explore, search, and use marine data from the EDITO Data Lake using the
 - Analysis-ready formats (Zarr, Parquet, COG)
 - Tools to publish, process, and visualize ocean data
 
----
-# 🚀 Goals for Today
 
-✅ Understand what STAC and S3 are  
-✅ Discover ARCO data formats  
-✅ Query the API using R or Python  
-✅ Find and use public marine datasets
+---
+
+# Data in EDITO
+
+The data available in the EU DTO consists of a **STAC (SpatioTemporal Asset Catalog)** as well Data storage on S3 buckets
+
+<img src='../assets/images/editodatalake.png'>EDITO Data Lake</img>
 
 ---
 
@@ -177,17 +178,32 @@ Each has consistent metadata (bbox, datetime, etc.)
 
 ---
 
-# 📦 What is S3?
+# 🔍 Use the EDITO STAC Viewer
 
-**Amazon S3** (Simple Storage Service):
-- Object storage for files (Parquet, Zarr, GeoTIFF...)
-- EDITO uses S3-compatible endpoints to store public datasets
+[viewer.dive.edito.eu](https://viewer.dive.edito.eu/)
 
-🧪 Works with:
-- Python: `s3fs`, `fsspec`, `rioxarray`, `zarr`
-- R: `arrow`, `aws.s3`
+We can follow the STAC structure to the EUROBIS database exported in parquet
 
-Access via URLs: `https://...s3...`
+Catalog -> Catalog      -> Collection      -> Item
+EMODnet -> Biodiversity -> Occurrence data ->  Occurrence data eurobis database observations
+
+---
+
+## [DEMO Using STAC Viewer](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/usingEDITOSTACviewer.mp4)
+<!-- <img src="https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/images/usingEDITOSTACviewer.png"></img> -->
+  <img src="../assets/images/usingEDITOSTACviewer.png"></img>
+Can also view in your browser [radiantearth.github.io/stac-browser](https://radiantearth.github.io/stac-browser/#/https%3A%2F%2Fapi.dive.edito.eu%2Fdata%2F?.language=en)
+
+---
+
+# Search EDITO STAC via the API
+
+Base URL for STAC:
+```
+https://api.dive.edito.eu/data/
+```
+
+📖 Docs: [Interact with Data API](https://pub.pages.mercator-ocean.fr/edito-infra/edito-tutorials-content/#/interactWithTheDataAPI)  
 
 ---
 
@@ -222,23 +238,6 @@ xr.open_zarr("https://s3...zarr/", consolidated=True)
 
 ---
 
-# 🗺️ COG: Cloud Optimized GeoTIFF
-
-COG = regular GeoTIFF + internal tiling and indexing
-
-✅ Works via HTTP range requests  
-✅ Great for satellite images, raster maps
-
-🔗 Tools: `rioxarray`, `rasterio`, `QGIS`
-
-```python
-import rioxarray
-url = "https://...cog.tif"
-da = rioxarray.open_rasterio(url)
-```
-
----
-
 # 🗃️ Parquet and GeoParquet
 
 Parquet = columnar tabular format, very efficient  
@@ -250,43 +249,60 @@ GeoParquet = Parquet + geospatial metadata
 🔗 [parquet.apache.org](https://parquet.apache.org)  
 🔗 [geoparquet.org](https://geoparquet.org)
 
+---
+
+# 📁 Access Parquet/GeoParquet via Arrow (Python)
+
 ```python
 import pyarrow.dataset as ds
 import s3fs
 
 fs = s3fs.S3FileSystem(anon=True)
-dataset = ds.dataset("s3://...parquet...", filesystem=fs)
+dataset = ds.dataset("s3://...your-parquet-folder...",
+                     filesystem=fs, format="parquet")
+
 df = dataset.to_table().to_pandas()
+print(df.head())
 ```
 
 ---
 
-# 🔗 EDITO API Endpoints
+# Lets Explore the EDITO STAC, find an ARCO dataset from Biodiversity
 
-Base URL for STAC:
-```
-https://api.dive.edito.eu/data/
-```
 
-📖 Docs: [docs.edito.eu](https://docs.edito.eu)  
-🔐 No auth needed for public data
+### 🔗 <a href="https://raw.githubusercontent.com/samuelfooks/contributing-edito/refs/heads/main/add_tutorial/demo_stac_query.Rmd" style="font-size: 1em; text-decoration: none; color: var(--text-color);">Tutorial</a>
 
-Try browsing with a tool like [radiantearth.github.io/stac-browser](https://radiantearth.github.io/stac-browser/#/https%3A%2F%2Fapi.dive.edito.eu%2Fdata%2F?.language=en)
+---
+
+## Reading parquet
+
+Lets go read that parquet 
+https://s3.waw3-1.cloudferro.com/emodnet/biology/eurobis_occurrence_data/eurobis_occurrences_geoparquet_2024-10-01.parquet
+
+
+---
+
+## For your learning pleasure
 
 ---
 
 # 🔍 Explore Collections (Python)
 
 ```python
-import requests
+import pystac_client
 
 url = "https://api.dive.edito.eu/data/collections"
-response = requests.get(url)
-data = response.json()
+editocollections = pystac_client.Client.open(url)
+collections = list(editocollections.get_collections())
 
-print("Found collections:", len(data['collections']))
-for col in data['collections'][:5]:
-    print(col['id'], ":", col['title'])
+print("Found collections:", len(collections))
+for col in collections[:5]:
+    print(col.id, ":", col.title)
+    items = col.get_items()
+    itemlist = list(items)
+    for item in itemlist:
+        print(item.properties['title'])
+        print(item.assets)
 ```
 
 ---
@@ -308,49 +324,16 @@ length(collections$collections)  # how many
 
 ---
 
-# 🔍 Use the EDITO STAC Search UI
-
-The EDITO STAC front-end viewer [EDITOVIEWER](https://viewer.dive.edito.eu/)
-
----
-
-# 📁 Access Parquet/GeoParquet via Arrow (Python)
-
-```python
-import pyarrow.dataset as ds
-import s3fs
-
-fs = s3fs.S3FileSystem(anon=True)
-dataset = ds.dataset("s3://...your-parquet-folder...",
-                     filesystem=fs, format="parquet")
-
-df = dataset.to_table().to_pandas()
-print(df.head())
-```
-
----
-
-# Lets Try it out
-
-A sneak peak at a tutorial
- 
-# 🔗 View the Full Tutorial
-<a href="../add-service/docker/output/demo_stac_query.html" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Click here to view the full tutorial</a>
-
----
-
 # 📌 Recap: What You Can Now Do
 
 ✅ Understand the EDITO API and data stack  
 ✅ Find and filter collections/items  
 ✅ Read Parquet or Zarr data with Python or R  
-✅ Build workflows for marine data analysis
 
 🧭 Go explore: [my-ocean.dive.edito.eu](https://my-ocean.dive.edito.eu)
-
+                [viewer.dive.edito.eu](https://viewer.dive.edito.eu/)
 💬 Questions?  
 📧 Reach us at: edito-infra-dev@mercator-ocean.eu  
-🔗 Docs: [docs.edito.eu](https://docs.edito.eu)  
-🛠️ Workshop: [datalab.dive.edito.eu](https://datalab.dive.edito.eu)
+🔗 Docs: [Interact with EDITO Data](https://pub.pages.mercator-ocean.fr/edito-infra/edito-tutorials-content/#/interactWithTheDataAPI) 
 
 🌊 Happy exploring!

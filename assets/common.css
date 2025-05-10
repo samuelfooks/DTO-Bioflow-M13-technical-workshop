@@ -1,0 +1,98 @@
+/* @theme edito-tutorials */
+@import 'default';
+
+:root {
+  --background-gradient: linear-gradient(to bottom, #f0faff, #e6f7ff);
+  --text-color: #00264d;
+  --accent-color: #005b99;
+  --border-color: #99ccff;
+  --font-family: 'Lato', sans-serif;
+  --icon-size: 5vw;
+  --text-size: 3vw;
+}
+
+section {
+  background: var(--background-gradient);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  padding: 5%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border: 2px solid var(--border-color);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Large globe image on the right side */
+section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translateY(-50%);
+  background: url('https://raw.githubusercontent.com/samuelfooks/contributing-edito/main/images/editoglobe.png') no-repeat center right;
+  background-size: 300px;
+  opacity: 0.08;
+  width: 300px;
+  height: 300px;
+  z-index: 0;
+}
+
+section::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 60px;
+  height: 180px;
+  z-index: 1;
+
+  background-image:
+    url('https://raw.githubusercontent.com/samuelfooks/contributing-edito/main/images/copernicus.png'),
+    url('https://raw.githubusercontent.com/samuelfooks/contributing-edito/main/images/emodnet.png'),
+    url('https://raw.githubusercontent.com/samuelfooks/contributing-edito/main/images/editofish.png');
+
+  background-repeat: no-repeat, no-repeat, no-repeat;
+
+  background-size:
+    50px,
+    50px,
+    50px;
+
+  background-position:
+    bottom right,
+    bottom right 60px,
+    bottom right 120px;
+
+  opacity: 0.8;
+}
+
+
+h1, h2, h3 {
+  color: var(--accent-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  position: relative;
+  font-size: var(--text-size);
+  animation: slideIn 1s ease-in-out;
+}
+
+.scrollable {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1em;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: none;
+  font-size: 0.9em;
+  color: var(--text-color);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}

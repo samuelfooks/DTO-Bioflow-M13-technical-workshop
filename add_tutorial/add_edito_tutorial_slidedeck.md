@@ -1,134 +1,11 @@
 ---
 marp: true
 paginate: true
+theme: edito-tutorials
 title: Contributing an R Tutorial to EDITO Datalab
 description: From R Markdown to a tutorial live on EDITO
+class: lead
 ---
-
-<style>
-/******************
-Enhanced Visual Design with Logos and Watermarks
-******************/
-:root {
-  --background-gradient: linear-gradient(to bottom, #f0faff, #e6f7ff); /* Light ocean gradient */
-  --text-color: #00264d; /* Darker blue text */
-  --accent-color: #005b99; /* Deep blue accents */
-  --border-color: #99ccff; /* Subtle blue border */
-  --font-family: 'Lato', sans-serif; /* Modern sans-serif font */
-  --icon-size: 5vw; /* Responsive icon size */
-  --text-size: 3vw; /* Responsive text size */
-  --animation-duration: 1s; /* Animation duration */
-}
-
-section {
-  background: var(--background-gradient);
-  color: var(--text-color);
-  font-family: var(--font-family);
-  padding: 5%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  border: 2px solid var(--border-color); /* Add border */
-  animation: fadeIn var(--animation-duration) ease-in-out; /* Add fade-in animation */
-}
-
-section::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  transform: translateY(-50%);
-  background: url('./images/copernicus.png') no-repeat center, url('./images/emodnet.png') no-repeat center;
-  background-size: 150px, 150px;
-  background-position: left top, left bottom;
-  opacity: 0.1; /* Subtle watermark */
-  width: 300px;
-  height: 300px;
-  z-index: 0;
-}
-
-section::after {
-  content: '';
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: url('./images/editofish.png'), url('./images/euflag.png');
-  background-repeat: no-repeat;
-  background-size: 50px, 50px;
-  background-position: right bottom, right 60px bottom;
-  width: 100px;
-  height: 100px;
-  z-index: 1;
-}
-
-h1, h2, h3 {
-  color: var(--accent-color);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-  position: relative;
-  font-size: var(--text-size);
-  animation: slideIn var(--animation-duration) ease-in-out; /* Add slide-in animation */
-}
-
-/******************
-Animations
-******************/
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-/******************
-Reusable Scrollable Style
-******************/
-/* .scrollable {
-  height: 400px;
-  overflow-y: auto;
-  border: 1px solid var(--border-color);
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 2;
-  position: relative;
-} */
-.scrollable {
-  max-height: 400px;
-  overflow-y: auto;
-  padding: 1em;
-  background-color: var(--background-gradient); /* Match slide background */
-  box-shadow: none; /* Remove shadow */
-  font-size: 0.9em;
-  color: var(--text-color); /* Match text color */
-}
-/******************
-Responsive Icon and Text Styling
-******************/
-.icon {
-  font-size: var(--icon-size);
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.link-text {
-  font-size: var(--text-size);
-  font-weight: bold;
-  color: var(--accent-color);
-}
-</style>
 
 # 👋 Welcome!
 
@@ -136,21 +13,22 @@ Responsive Icon and Text Styling
 
 Learn how to contribute your knowledge to [**DTO Tutorials** ](https://dive.edito.eu/training).
 
+<img src="../assets/images/editotutorialspage.png">Tutorials</img>
 Presented by **Samuel Fooks**  
 _Flanders Marine Institute (VLIZ)_
 
 ---
 
-# 🎯 What You'll Learn
+# 🎯 What We'll Go Over
 
-By the end of this session, you’ll know how to:
-
-✅ Create an R tutorial with `.Rmd`  
+✅ How to become a contributor to EDITO tutorials
+✅ Create a shareable tutorial   
 ✅ Share it publicly via **GitHub**  
 ✅ Launch it on **EDITO Datalab**  
-✅ Become a contributor to the EDITO tutorials  
 ✅ Register it using `tutorials.json`  
 ✅ Submit a **merge request**
+
+All this is also covered in [EDITO Datalab Documentation](https://pub.pages.mercator-ocean.fr/edito-infra/edito-tutorials-content/#/).
 
 ---
 
@@ -159,50 +37,51 @@ By the end of this session, you’ll know how to:
 <div class="scrollable">
 
 <span style="font-size: 1.5em; font-weight: bold; color: var(--accent-color);">🌐 Become a Beta Tester:</span>
-<a href="https://edito-infra.eu/european-digital-twin-ocean-beta-testing-sign-up-form/" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Sign up here</a>
-
-<br><br>
+<a href="https://edito-infra.eu/european-digital-twin-ocean-beta-testing-sign-up-form/" style="font-size: 1.2em; text-decoration: none; color: blue;">Sign up here</a>
 
 <span style="font-size: 1.5em; font-weight: bold; color: var(--accent-color);">📧 Receive an Email:</span>
 You will receive an email from the developer team with further instructions.
 
-<br><br>
 
 <span style="font-size: 1.5em; font-weight: bold; color: var(--accent-color);">🔑 Sign up to Mercator Ocean GitLab:</span>
-<a href="https://gitlab.mercator-ocean.fr/users/sign_up" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Create your account</a>
+<a href="https://gitlab.mercator-ocean.fr/users/sign_up" style="font-size: 1.2em; text-decoration: none; color: blue;">Create your account</a>
 
-<br><br>
+---
+
+# Contribute to the Tutorials Content Repository
 
 <span style="font-size: 1.5em; font-weight: bold; color: var(--accent-color);">🔗 Access Repositories:</span>
 Once your account is created, you will be added as a developer to the following repositories:
 <ul>
-  <li><a href="https://gitlab.mercator-ocean.fr/pub/edito-infra/service-playground" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Service Playground Repository</a></li>
-  <li><a href="https://gitlab.mercator-ocean.fr/pub/edito-infra/process-playground" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Process Playground Repository</a></li>
-  <li><a href="https://gitlab.mercator-ocean.fr/pub/edito-infra/edito-tutorials-content" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Tutorial Content Repository</a></li>
+  <li><a href="https://gitlab.mercator-ocean.fr/pub/edito-infra/service-playground" style="font-size: 1.2em; text-decoration: none; color: blue;">Service Playground Repository</a></li>
+  <li><a href="https://gitlab.mercator-ocean.fr/pub/edito-infra/process-playground" style="font-size: 1.2em; text-decoration: none; color: blue;">Process Playground Repository</a></li>
+  <li><a href="https://gitlab.mercator-ocean.fr/pub/edito-infra/edito-tutorials-content" style="font-size: 1.2em; text-decoration: none; color: blue;">Tutorial Content Repository</a></li>
 </ul>
 
+<!-- <img src='../assets/images/editogitlabtutorials.png'>Tutorials Git Lab</img> -->
 </div>
 
 ---
 
-# 🧱 Make a tutorial in R Markdown
+# 🧱 I have a new tool/script to share
 
-✔️ Open **RStudio**
-➡️ Create a new `.Rmd` file:
-  - Go to `File → New File → R Markdown...`
-  - Choose a title, author, and output format (e.g., HTML)
-🖋️ Add content to your `.Rmd` file:
-  - Write text using Markdown syntax
-  - Insert code chunks with R code using ```` ```{r}`````
-  - Add visualizations, tables, or outputs
+
+✅ For example, I’ve written a tutorial in `.Rmd`:
+
+- It explains how to use a tool or perform a task  
+- Includes **Markdown** text and **R code chunks**  
+- Shows plots, tables, or results inline
+- Has some interactivity/user interaction
 
 ---
 
-# 🧱 Tutorial Accessing EDITO STAC
+# 🧱 Example: Tutorial Accessing EDITO STAC
 
 ## [demo_stac_query.Rmd](https://github.com/samuelfooks/contributing-edito/blob/main/add_tutorial/demo_stac_query.Rmd)
 
-<video src="../videos/makeRmd.mp4" controls width="800" allowfullscreen></video>
+🎬 [Making Tutorial in .Rmd](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/makeRmd.mp4)
+<video src="../assets/videos/makeRmd.mp4" controls width="800" allowfullscreen></video>
+
 
 ---
 
@@ -211,79 +90,77 @@ Once your account is created, you will be added as a developer to the following 
 
 Organize your files like this:
 
+- Include a good 
+
 ```
-sst-r-tutorial/
-├── sst-r-tutorial.Rmd
+stac-r-tutorial/
+├── stac-r-tutorial.Rmd
 ├── data/
 └── README.md
 ```
 
 ---
 
-# 🌐 Create a GitHub Repository
+# 🌐 Create a Repository on your GitHub
 
 - Go to [github.com](https://github.com)
 - Click **New repository**
 - Set it to **Public**
-- Creating Your First GitHub Repository and Pushing Code [Youtube](https://youtu.be/f26KI43FK58)
+
+A demonstration on YouTube
+Creating Your First GitHub Repository and Pushing Code [Youtube](https://youtu.be/f26KI43FK58)
 
 ---
 
-# 💻 Push Your Local Code
-
-<div class="scrollable">
+# 💻 Push Your Local Code to Your Github
+<!-- fit -->
+<!-- <div class="scrollable"> -->
 
 ```bash
 # Initialize Git in your local directory (if not already initialized)
 git init
-
-# Create a .gitignore file to exclude the data/ folder
-echo "data/" >> .gitignore
-
 # Add all files to the staging area
 git add .
 git config user.name username
 git config user.email usermail@mail.com
-
 # Commit the changes
 git commit -m "Initial commit"
-
 # Add the remote origin
-git remote add origin https://github.com/username/repo-name.git
-
+git remote add origin https://github.com/username/stac-r-tutorial.git
 # Push the changes to GitHub
 git branch -M main
 git push -u origin main
 
 ```
 
-Replace `username` and `repo-name` with your GitHub username and repository name.
-
 Creating Your First GitHub Repository and Pushing Code [Youtube](https://youtu.be/f26KI43FK58)
 
-</div>
+<!-- </div> -->
 
 ---
 
-# ⚙️ Configuring the EDITO Service
+# ⚙️ Make your deployment URL
 
-To configure the EDITO service with your GitHub repository and launch it:
-
-<div class="scrollable">
+[EDITO Services](https://datalab.dive.edito.eu/catalog/All)
 
 1. **Access the Service Configuration**  
-  - Choose a service from the Service Catalog
-  - ex. R Studio in the IDEs and **Launch** the configuration.
+  - Choose a service from the Service Catalog appropriate for your Tutorial
+  - ex. R Studio, Jupyter-python
 
 2. **Add Your GitHub Repository**  
-  - Enter your GitHub repository URL in the `Git Repository` field.
-  - Provide your Git username and email if prompted.
+  - In the `GIT` section add the url to your tutorial's github repository in the Repository field
 
 3. **Set Resource Limits**  
-  - Adjust CPU and memory limits as needed (e.g., `1600m` for CPU, `5Gi` for memory).
+  - In the resources section, adjust CPU and memory limits as needed 
+  - e.g., `1600m` for CPU, `5Gi` for memory
+
+---
+
+# Save Configuration and Test your tutorial
 
 4. **Save the Configuration**  
-  - Click **Save** to store your settings.
+  - Click **Save** to store your settings. 
+  - You will need this URL for the Deployment URL to add your tutorial later
 
 5. **Launch the Service**  
   - Use the **Launch** button to start the service with your configuration.
@@ -291,14 +168,12 @@ To configure the EDITO service with your GitHub repository and launch it:
 6. **Test Your Tutorial**  
   - Verify that your tutorial runs as expected in the configured environment.
 
-For more details, refer to the [EDITO Datalab Documentation](https://pub.pages.mercator-ocean.fr/edito-infra/edito-tutorials-content/#/).
-</div>
-
 ---
 
 <div class="scrollable">
 
-  <video src="../videos/configuretutorialservice.mp4" controls width="900"></video>
+  ### [Configuring EDITO Service](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/configuretutorialservice.mp4)
+  <video src="../assets/videos/configuretutorialservice.mp4" controls width="900"></video>
 
 </div>
 
@@ -306,33 +181,29 @@ For more details, refer to the [EDITO Datalab Documentation](https://pub.pages.m
 
 # Test My Tutorial Service
 
-- <span style="color: var(--accent-color);">🚀</span> **Run Everything**
-- <span style="color: var(--accent-color);">✅</span> **Check Output**
-- <span style="color: var(--accent-color);">⚙️</span> **Choose Configuration Options**:
-  - <span style="color: var(--accent-color);">🔗</span> **Configuration Link**: Allows users to configure how the service launches
-  - <span style="color: var(--accent-color);">🚀</span> **Autolaunch Link**: Launches the configuration you save
+- <span style="color: var(--accent-color); font-size: 1.2em;">🚀</span> **Ran Everything**
+- <span style="color: var(--accent-color); font-size: 1.2em;">✅</span> **Checked Output**
+- <span style="color: var(--accent-color); font-size: 1.2em;">⚙️</span> <strong>Chosen Configuration Options</strong>:
+  - <span style="color: var(--accent-color); font-size: 1.2em;">🔗</span> <strong><a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=1600m&resources.limits.memory=5Gi&git.name=&git.email=&git.repository=https%3A%2F%2Fgithub.com%2Fsamuelfooks%2Fcontributing-edito" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Configuration Link</a></strong>:  
+    Allows users to configure how the service launches
+  - <span style="color: var(--accent-color); font-size: 1.2em;">🚀</span> <strong><a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=«1600m»&resources.limits.memory=«5Gi»&git.name=«»&git.email=«»&git.repository=«https%3A%2F%2Fgithub.com%2Fsamuelfooks%2Fcontributing-edito»&autoLaunch=true" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Autolaunch Link</a></strong>: Launches the configuration you save
 
 ---
 
-# Link to Service Configuration or Auto Launch Link
+## Tutorials respository and the tutorials.json
 
-<span style="font-size: 1.5em; font-weight: bold; color: var(--accent-color);">Configuration Link:</span>
-<a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=%C2%AB1600m%C2%BB&resources.limits.memory=%C2%AB5Gi%C2%BB&git.name=%C2%AB%C2%BB&git.email=%C2%AB%C2%BB&git.repository=%C2%ABhttps%3A%2F%2Fgithub.com%2Fsamuelfooks%2Fcontributing-edito%C2%BB" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Configure the tutorial</a>
+In order to add our tutorial to the EDITO tutorials we need to add it to the `tutorials.json` list 
 
-<br>
+[https://gitlab.mercator-ocean.fr/pub/edito-infra/edito-tutorials-content/tutorials.json](https://gitlab.mercator-ocean.fr/pub/edito-infra/edito-tutorials-content/-/blob/main/tutorials.json)
 
-<span style="font-size: 1.5em; font-weight: bold; color: var(--accent-color);">Auto Launch Link:</span>
-<a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=«1600m»&resources.limits.memory=«5Gi»&git.name=«»&git.email=«»&git.repository=«https%3A%2F%2Fgithub.com%2Fsamuelfooks%2Fcontributing-edito»&autoLaunch=true" style="font-size: 1.2em; text-decoration: none; color: var(--text-color);">Click here to auto-launch the tutorial </a>
-
+We will clone this repository and add our tutorial to this list, using the the template provided in the README
 
 ---
 
+# 🛠️ Clone the Tutorials Repository to your Local PC
 
-# 🛠️ Clone the Tutorials Repository
 
-<div class="scrollable">
-
-🌐 **Go to GitLab**:  
+🌐 **EDITO GitLab Tutorials**:  
   [https://gitlab.mercator-ocean.fr/pub/edito-infra/edito-tutorials-content](https://gitlab.mercator-ocean.fr/pub/edito-infra/edito-tutorials-content)
 
 <br>
@@ -345,11 +216,12 @@ For more details, refer to the [EDITO Datalab Documentation](https://pub.pages.m
 
 ---
 
-<video src="../videos/clonetutorialscontent.mp4" controls width="800"></video>
+### [Cloning EDITO Tutorials Content](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/clonetutorialscontent.mp4)
+<video src="../assets/videos/clonetutorialscontent.mp4" controls width="800"></video>
 
 ---
 
-# 🛠️ Make a new branch, Add Your Tutorial to `tutorials.json`
+# 🛠️ Make a new branch
 
 <div class="scrollable">
   <span style="color: var(--accent-color); font-size: 1.5em;">🌿</span> **Create a New Branch**:
@@ -364,37 +236,74 @@ For more details, refer to the [EDITO Datalab Documentation](https://pub.pages.m
   git push origin my-new-tutorial-branch
   ```
 
-  <br>
-  <video src="../videos/makenewbranch.mp4" controls width="800"></video>
-  <br>
+---
 
-  <span style="color: var(--accent-color); font-size: 1.5em;">📄</span> **Edit `tutorials.json`**:
+  ### [Make branch](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/makenewbranch.mp4)
+  <video src="../assets/videos/makenewbranch.mp4" controls width="800"></video>
 
-  <pre style="font-size: 1.2em; background-color: #f9f9f9; padding: 10px; border-radius: 5px;">
-  {
-    "title": "Exploring Ocean Data with EDITO STAC API",
-    "description": "Learn how to query the EDITO STAC API and process Parquet files in R for ocean data analysis.",
-    "authors": ["Jane Doe", "Marine Data Institute"],
-    "types": ["Tutorial"],
-    "tags": ["ocean", "data analysis", "R"],
-    "category": "Training Courses",
+---
+
+## Add your tutorial to 'tutorials.json'
+
+<span style="color: var(--accent-color); font-size: 1.2em;">🔗</span> <strong><a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=1600m&resources.limits.memory=5Gi&git.name=&git.email=&git.repository=https%3A%2F%2Fgithub.com%2Fsamuelfooks%2Fcontributing-edito" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Deployment URL from previous step</a></strong>
+
+<!--- fit -->
+```json
+{
+    "name": {
+        "en": "My New Tutorial"
+    },
+    "abstract": {
+        "en": "A short description of your tutorial"
+    },
+    "authors": [
+        "The authors and contributors"
+    ],
+    "types": [
+        "types": [
+          {
+            "en": "Tutorial"
+          }
+    ],
+    "tags": [
+        "create", 
+    ],
+    "category": "training courses in data science",  // "What-If applications", "Focus applications", "training courses in data science"
     "imageUrl": "https://www.edito.eu/wp-content/uploads/2023/09/favicon.png",
-    "articleUrl": "https://github.com/marine-data-institute/ocean-tutorial",
-    "deploymentUrl": "https://datalab.dive.edito.eu/launcher/ide/rstudio?name=Exploring%20Ocean%20Data%20with%20EDITO%20STAC%20API&shared=false&autoLaunch=true&git.repository=https%3A%2F%2Fgithub.com%2Fmarine-data-institute%2Focean-tutorial&init.personalInit=https%3A%2F%2Fraw.githubusercontent.com%2Fmarine-data-institute%2FR_init_EDITO%2Fmain%2Ftools_init.sh&resources.limits.cpu=4000m&resources.requests.cpu=2000m&resources.limits.memory=7Gi&resources.requests.memory=3Gi"
-  }
-  </pre>
+    "articleUrl": {
+        "en": "https://github.com/username/stac-r-tutorial", // Your github
+    }
+    "deploymentUrl": "https://datalab.dive.edito.eu/mydeployment.configuration.git.resources.etc"// DEPLOYMENT URL FROM PREVIOUS STEP
+    // parts: [] 
+},
 
-  <video src="../videos/addtutorialjson.mp4" controls width="800"></video>
-</div>
+```
+
+---
+
+### [Adding to tutorials.json](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/addtutorial.mp4)
+  <video src="../assets/videos/addtutorialjson.mp4" controls width="800"></video>
+
+---
+
+## Push your updates onto your branch
+
+```bash
+# Stage all changes
+git add .
+# Commit the changes with a descriptive message
+git commit -m "Added my awesome tutorial to tutorials.json"
+# Push the changes to your branch
+git push origin my-new-tutorial-branch
+```
 
 ---
 
 # 🔁 Create a Merge Request
-
-- [ ] Push your branch to your fork
-- [ ] Go to GitLab → **New Merge Request**
-- [ ] Create a Merge Requests against branch main
-- ping @pub/edito-infra/codeowners to request code owners to review your proposal.
+- Check the gitlab https://gitlab.mercator-ocean.fr/pub/edito-infra/edito-tutorials-content
+- See if your commit is in a pipeline and if it passes or not
+- If it passes, create a Merge Request
+- In your merge request, '@pub/edito-infra/codeowners' to request code owners to review your proposal.
 
 ---
 
@@ -403,7 +312,8 @@ For more details, refer to the [EDITO Datalab Documentation](https://pub.pages.m
 ✔️ Tutorial `.Rmd` created and runs  
 ➡️ GitHub repo is public and clean  
 🔗 Launch link tested  
-✅ `tutorials.json` updated  
+✅ `tutorials.json` updated
+✅ Commited to Gitlab and passes Pipeline
 ✔️ Merge Request submitted
 
 ---
