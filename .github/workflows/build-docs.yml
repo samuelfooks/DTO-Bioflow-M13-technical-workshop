@@ -16,8 +16,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Pandoc
-      run: sudo apt-get install -y pandoc
+    - name: Set up node, marp-cli
+      run: sudo apt-get update && sudo apt-get install -y nodejs npm && \
+          sudo npm install -g marp-cli && \
+          sudo npm install -g @marp-team/marp-cli
 
     - name: Build HTML and PDF
       run: make all

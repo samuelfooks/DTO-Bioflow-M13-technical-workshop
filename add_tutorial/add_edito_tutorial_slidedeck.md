@@ -77,9 +77,11 @@ Once your account is created, you will be added as a developer to the following 
 
 # 🧱 Example: Tutorial Accessing EDITO STAC
 
-## [demo_stac_query.Rmd](https://github.com/samuelfooks/contributing-edito/blob/main/add_tutorial/demo_stac_query.Rmd)
+## Here in this repository /add_tutorial/my_stac_r_tutorial/stac_r_tutorial.Rmd
 
-🎬 [Making Tutorial in .Rmd](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/makeRmd.mp4)
+### [stac_r_tutorial.Rmd](https://github.com/samuelfooks/contributing-edito/blob/main/add_tutorial/my_stac_r_tutorial/stac_r_tutorial.Rmd)
+
+🎬 [Video making Rmd](https://github.com/samuelfooks/contributing-edito/raw/refs/heads/main/assets/videos/makeRmd.mp4)
 <video src="../assets/videos/makeRmd.mp4" controls width="800" allowfullscreen></video>
 
 
@@ -88,14 +90,15 @@ Once your account is created, you will be added as a developer to the following 
 
 # 📂 Recommended Folder Structure
 
-Organize your files like this:
-
-- Include a good 
+- Not mandatory but on EDITO we need applications that are resilient and understandable for everyone
+- Include a good README.md [makeareadme.com](https://www.makeareadme.com/)
+- Data and other assets separate
 
 ```
-stac-r-tutorial/
+my_stac_r_tutorial/
 ├── stac-r-tutorial.Rmd
 ├── data/
+├── docker-compose.yml(*optional)
 └── README.md
 ```
 
