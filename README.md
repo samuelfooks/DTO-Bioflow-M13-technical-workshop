@@ -1,4 +1,4 @@
-# Contributing to the EDITO Platform
+# DTO-Bioflow-M13-technical-workshop
 
 This repository provides resources and guidelines for contributing to the EDITO platform. It demonstrates how to:
 
