@@ -4,94 +4,89 @@ paginate: true
 theme: edito-tutorials
 title: Accessing EDITO Data with the API
 ---
-<!-- <style>
-/******************
-Refined Digital Twin Ocean Theme with Responsive Scaling
-******************/
-:root {
-  --background-gradient: linear-gradient(to bottom, #f0faff, #e6f7ff); /* Light ocean gradient */
-  --text-color: #00264d; /* Darker blue text */
-  --accent-color: #005b99; /* Deep blue accents */
-  --border-color: #99ccff; /* Subtle blue border */
-  --font-family: 'Lato', sans-serif; /* Modern sans-serif font */
-  --icon-size: 5vw; /* Responsive icon size */
-  --text-size: 3vw; /* Responsive text size */
-}
 
-section {
-  background: var(--background-gradient);
-  color: var(--text-color);
-  font-family: var(--font-family);
-  padding: 5%; /* Increased padding for larger elements */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
+<style>
+  .toc-toggle {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 10000;
+    background: #0070c0;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
 
-section::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: 5%;
-  transform: translateY(-50%);
-  background: url('./assets/images/editoglobe.png') no-repeat center;
-  background-size: 300px;
-  opacity: 0.1; /* Subtle watermark */
-  width: 300px;
-  height: 300px;
-  z-index: 0;
-}
+  .slide-menu {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 240px;
+    height: 100%;
+    background: #fff;
+    border-right: 1px solid #ccc;
+    padding: 1rem;
+    overflow-y: auto;
+    z-index: 9999;
+    font-family: sans-serif;
+    transition: left 0.3s ease-in-out;
+  }
 
-section::after {
-  content: '';
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: url('./assets/images/editofish.png'), url('./assets/images/euflag.png');
-  background-repeat: no-repeat;
-  background-size: 50px, 50px;
-  background-position: right bottom, right 60px bottom;
-  width: 100px;
-  height: 100px;
-  z-index: 1;
-}
+  .slide-menu.open {
+    left: 0;
+  }
 
-h1, h2, h3 {
-  color: var(--accent-color);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-  position: relative;
-  font-size: var(--text-size); /* Responsive text size */
-}
+  .slide-menu h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
 
-/******************
-Reusable Scrollable Style
-******************/
-.scrollable {
-  max-height: 400px;
-  overflow-y: auto;
-  padding: 1em;
-  background-color: var(--background-gradient); /* Match slide background */
-  box-shadow: none; /* Remove shadow */
-  font-size: 0.9em;
-  color: var(--text-color); /* Match text color */
-}
+  .slide-menu ul {
+    list-style: none;
+    padding-left: 0;
+  }
 
-/******************
-Responsive Icon and Text Styling
-******************/
-.icon {
-  font-size: var(--icon-size); /* Responsive icon size */
-  display: inline-block;
-  vertical-align: middle;
-}
+  .slide-menu li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
 
-.link-text {
-  font-size: var(--text-size); /* Responsive text size */
-  font-weight: bold;
-  color: var(--accent-color);
-}
-</style> -->
+  .slide-menu a {
+    text-decoration: none;
+    color: #0070c0;
+  }
+
+  .slide-menu a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll("section");
+    const slideLinks = Array.from(slides).map((slide, i) => {
+      const titleEl = slide.querySelector("h1, h2, h3");
+      const title = titleEl ? titleEl.textContent.trim() : `Slide ${i + 1}`;
+      slide.id = `slide-${i}`;
+      return `<li><a href="#slide-${i}">${i + 1}. ${title}</a></li>`;
+    }).join("");
+
+    document.querySelectorAll(".slide-menu ul").forEach(ul => {
+      ul.innerHTML = slideLinks;
+    });
+
+    document.querySelectorAll(".toc-toggle").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const menu = btn.nextElementSibling;
+        menu.classList.toggle("open");
+      });
+    });
+  });
+</script>
+
 
 # 🌊 Welcome!
 
@@ -102,6 +97,14 @@ Learn to explore, search, and use marine data from the EDITO Data Lake
 👨‍🏫 Presented by Samuel Fooks (VLIZ)
 
 ---
+
+<div>
+  <button class="toc-toggle">📋</button>
+  <div class="slide-menu">
+    <h2>📋 Slide Overview</h2>
+    <ul></ul>
+  </div>
+</div>
 
 # 🌍 What is EDITO?
 
@@ -117,15 +120,22 @@ Learn to explore, search, and use marine data from the EDITO Data Lake
 - Analysis-ready formats (Zarr, Parquet, COG)
 - Tools to publish, process, and visualize ocean data
 
-
 ---
 
 # Data in EDITO
+<div>
+  <button class="toc-toggle">📋</button>
+  <div class="slide-menu">
+    <h2>📋 Slide Overview</h2>
+    <ul></ul>
+  </div>
+</div>
 
 The data available in the EU DTO consists of a **STAC (SpatioTemporal Asset Catalog)** as well Data storage on S3 buckets
 
 <img src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/editodatalake.png?raw=true">EDITO Data Lake</img>
 
+<div class="logo-strip"></div>
 ---
 
 # 🗄️ EDITO Data Storage
@@ -278,6 +288,8 @@ print(df.head())
 
 Lets go read that parquet 
 https://s3.waw3-1.cloudferro.com/emodnet/biology/eurobis_occurrence_data/eurobis_occurrences_geoparquet_2024-10-01.parquet
+
+Using a pre configured service on EDITO [explore_data/view_parquet](https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=%C2%AB1600m%C2%BB&resources.limits.memory=%C2%AB5Gi%C2%BB&git.name=%C2%AB%C2%BB&git.email=%C2%AB%C2%BB&git.repository=%C2%ABhttps%3A%2F%2Fgithub.com%2Fsamuelfooks%2FDTO-Bioflow-M13-technical-workshop%C2%BB)
 
 ---
 

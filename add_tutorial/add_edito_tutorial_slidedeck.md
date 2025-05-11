@@ -231,7 +231,7 @@ We will clone this repository and add our tutorial to this list, using the the t
 
 ## Add your tutorial to 'tutorials.json'
 
-<span style="color: var(--accent-color); font-size: 1.2em;">🔗</span> <strong><a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=1600m&resources.limits.memory=5Gi&git.name=&git.email=&git.repository=https%3A%2F%2Fgithub.com%2Fsamuelfooks%2FDTO-Bioflow-M13-technical-workshop" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Deployment URL from previous step</a></strong>
+<span style="color: var(--accent-color); font-size: 1.2em;">🔗</span> <strong><a href="https://datalab.dive.edito.eu/launcher/ide/rstudio?name=myeditotutorialtest&version=2.3.1&s3=region-bb0d481d&resources.limits.cpu=%C2%AB1600m%C2%BB&resources.limits.memory=%C2%AB5Gi%C2%BB&git.name=%C2%AB%C2%BB&git.email=%C2%AB%C2%BB&git.repository=%C2%ABhttps%3A%2F%2Fgithub.com%2Fsamuelfooks%2FDTO-Bioflow-M13-technical-workshop%C2%BB" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Deployment URL from previous step</a></strong>
 
 <!--- fit -->
 ```json
