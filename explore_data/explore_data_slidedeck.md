@@ -124,7 +124,7 @@ Learn to explore, search, and use marine data from the EDITO Data Lake
 
 The data available in the EU DTO consists of a **STAC (SpatioTemporal Asset Catalog)** as well Data storage on S3 buckets
 
-<img src='../assets/images/editodatalake.png'>EDITO Data Lake</img>
+<img src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/editodatalake.png?raw=true">EDITO Data Lake</img>
 
 ---
 
@@ -279,14 +279,9 @@ print(df.head())
 Lets go read that parquet 
 https://s3.waw3-1.cloudferro.com/emodnet/biology/eurobis_occurrence_data/eurobis_occurrences_geoparquet_2024-10-01.parquet
 
-
 ---
 
-## For your learning pleasure
-
----
-
-# 🔍 Explore Collections (Python)
+# 🔍Exploring STAC via the API (Python)
 
 ```python
 import pystac_client
@@ -307,7 +302,7 @@ for col in collections[:5]:
 
 ---
 
-# 🧪 Optional: Find Items in R
+# 🧪 🔍Exploring STAC via the API (R)
 
 ```r
 library(rstac)
