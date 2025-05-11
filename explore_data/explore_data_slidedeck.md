@@ -87,7 +87,6 @@ title: Accessing EDITO Data with the API
   });
 </script> -->
 
-
 # 🌊 Welcome!
 
 ## Hands-On with the EDITO Data API
@@ -97,14 +96,6 @@ Learn to explore, search, and use marine data from the EDITO Data Lake
 👨‍🏫 Presented by Samuel Fooks (VLIZ)
 
 ---
-
-<div>
-  <button class="toc-toggle">📋</button>
-  <div class="slide-menu">
-    <h2>📋 Slide Overview</h2>
-    <ul></ul>
-  </div>
-</div>
 
 # 🌍 What is EDITO?
 
@@ -123,13 +114,6 @@ Learn to explore, search, and use marine data from the EDITO Data Lake
 ---
 
 # Data in EDITO
-<!-- <div>
-  <button class="toc-toggle">📋</button>
-  <div class="slide-menu">
-    <h2>📋 Slide Overview</h2>
-    <ul></ul>
-  </div>
-</div> -->
 
 The data available in the EU DTO consists of a **STAC (SpatioTemporal Asset Catalog)** as well Data storage on S3 buckets
 
