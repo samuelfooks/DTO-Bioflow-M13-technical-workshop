@@ -5,7 +5,7 @@ theme: edito-tutorials
 title: Accessing EDITO Data with the API
 ---
 
-<style>
+<!-- <style>
   .toc-toggle {
     position: fixed;
     top: 0.75rem;
@@ -85,7 +85,7 @@ title: Accessing EDITO Data with the API
       });
     });
   });
-</script>
+</script> -->
 
 
 # 🌊 Welcome!
@@ -123,13 +123,13 @@ Learn to explore, search, and use marine data from the EDITO Data Lake
 ---
 
 # Data in EDITO
-<div>
+<!-- <div>
   <button class="toc-toggle">📋</button>
   <div class="slide-menu">
     <h2>📋 Slide Overview</h2>
     <ul></ul>
   </div>
-</div>
+</div> -->
 
 The data available in the EU DTO consists of a **STAC (SpatioTemporal Asset Catalog)** as well Data storage on S3 buckets
 
@@ -200,7 +200,8 @@ EMODnet -> Biodiversity -> Occurrence data ->  Occurrence data eurobis database 
 ---
 
 ## [DEMO Using STAC Viewer](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/raw/refs/heads/main/assets/videos/usingEDITOSTACviewer.mp4)
-<img src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/usingEDITOSTACviewer.png?raw=true"></img>
+<img src="https://raw.githubusercontent.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/main/assets/images/usingEDITOSTACviewer.png"></img>
+
 
 Can also view in your browser [radiantearth.github.io/stac-browser](https://radiantearth.github.io/stac-browser/#/https%3A%2F%2Fapi.dive.edito.eu%2Fdata%2F?.language=en)
 
