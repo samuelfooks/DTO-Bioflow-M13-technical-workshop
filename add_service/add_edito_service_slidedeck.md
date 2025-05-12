@@ -9,8 +9,6 @@ header: " 🚧 Under Construction: This document is a work in progress! 🚧"
 
 # 👋 Welcome!
 
-# 🚧 Under Construction: This document is a work in progress! 🚧
-
 ## Deploying a Service on EDITO Datalab
 
 Learn how to turn your script into a containerized web service and launch it on the EDITO platform.
@@ -32,65 +30,127 @@ _Flanders Marine Institute (VLIZ)_
 
 # 🧱 Dockerizing Your Script
 
-## Example: R Markdown → Plumber API
+## Example: R Markdown → view_parquet.Rmd
 
-```r
-# plumber.R
-#* @get /hello
-function() {
-  list(message = "Hello from EDITO!")
-}
-```
+The `view_parquet.Rmd` script provides an interactive tool to load, filter, and visualize Parquet datasets. It includes:
+
+- **Interactive Table**: View and filter data using a searchable, paginated table.
+- **Map Visualization**: Display geospatial data (e.g., points, polygons) on an interactive map using `leaflet`.
+- **Download Filtered Data**: Export selected data as a CSV file.
+- **Metadata Schema**: Display the schema of the loaded Parquet dataset.
 
 ---
 
 ## Dockerfile Example
 
 ```Dockerfile
-FROM rstudio/plumber
+FROM rocker/shiny:4.5.0
 
-COPY plumber.R /plumber.R
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    libudunits2-dev \
+    libgdal-dev \
+    libgeos-dev \
+    libproj-dev \
+    libfontconfig1-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8000
+RUN R -e "install.packages(c('shiny', 'arrow', 'leaflet', 'DT', 'dplyr', 'sf', 'leaflet.extras', 'shinythemes'))"
 
-CMD ["R", "-e", "pr <- plumber::plumb('/plumber.R'); pr$run(host='0.0.0.0', port=8000)"]
+COPY view_parquet.Rmd /srv/shiny-server/view_parquet.Rmd
+
+EXPOSE 3838
+
+CMD ["R", "-e", "rmarkdown::run('/srv/shiny-server/view_parquet.Rmd', shiny_args = list(host = '0.0.0.0', port = 3838))"]
 ```
+
+---
+
+## Make a container registry token
+
+[Working with container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+
+You need your container registry token
 
 ---
 
 ## 🐳 Build and Push Docker Image
 
+Build and version your container using semantic versioning [docs](https://semver.org/)
+Not technically required, but if your new version fails, roll back easily.
+
 ```bash
-docker build -t ghcr.io/yourusername/hello-edito:latest .
+docker build -t ghcr.io/yourusername/view_parquet:1.0.0 .
+
+export CR_PAT = mycontainerregistrytoken
 
 echo $CR_PAT | docker login ghcr.io -u yourusername --password-stdin
 
-docker push ghcr.io/yourusername/hello-edito:latest
+docker push ghcr.io/yourusername/view_parquet:1.0.1
 ```
-
-Replace `yourusername` with your GitHub account.  
-Generate a token at https://github.com/settings/tokens.
 
 ---
 
-# 📦 Set Up Helm Chart
+## Test your public image
 
 ```bash
+docker run -p 3838:3838 ghcr.io/yourusername/view_parquet:1.0.1
+```
+
+Open your browser and navigate to:
+```
+http://localhost:3838
+```
+
+Your working app version is now usable by anyone, anywhere with Docker and an internet connection
+
+---
+
+# 📦 Clone the service playground, and add your service
+
+[How to add your service, README.md](https://gitlab.mercator-ocean.fr/pub/edito-infra/service-playground)
+
+```bash
+#clone the repo
 git clone https://gitlab.mercator-ocean.fr/pub/edito-infra/service-playground.git
 cd service-playground
-cp -r terria-map-viewer hello-edito
-cd hello-edito
+
+# make your own branch
+git checkout -b parquet_viewer_r
+git push origin parquet_viewer_r
+
+## Here we use the  terria-map-viewer as a basis for our service
+## instead of making from scratch
+cp -r terria-map-viewer parquet_viewer_r
 ```
+
+---
+
+## Chart.yaml
+
+Basic outline for deployment
 
 Edit `Chart.yaml`:
 ```yaml
-name: hello-edito
-description: A simple Plumber API demo on EDITO
-home: https://github.com/yourusername/hello-edito
+name: view-parquet
+description: An interactive Parquet viewer on EDITO
+home: https://github.com/yourusername/view_parquet
 icon: https://your.icon.url/icon.png
-keywords: [plumber, r, api]
+keywords: [shiny, r, parquet, viewer]
 version: 1.0.0
-appVersion: "0.1.0"
+appVersion: "1.0.0"
+dependencies:
+  - name: library-chart
+    version: 1.5.16
+    repository: https://inseefrlab.github.io/helm-charts-interactive-services
+
 ```
 
 ---
@@ -101,21 +161,25 @@ appVersion: "0.1.0"
 ```yaml
 service:
   image:
-    version: "ghcr.io/yourusername/hello-edito:latest"
-
+    version: "ghcr.io/yourusername/view-parquet:1.0.1"
+            
 networking:
   service:
-    port: 8000
+    port: 3838
 ```
 
 ---
 
+## Latest image in values.schema.json
+
+Choose which version(s) of your package/app that users should be able to select in the User interface
 ## `values.schema.json`
 ```json
 "listEnum": [
-  "ghcr.io/yourusername/hello-edito:latest"
+    "ghcr.io/yourusername/view-parquet:1.0.1",
+    "ghcr.io/yourusername/view-parquet:1.0.0"
 ],
-"default": "ghcr.io/yourusername/hello-edito:latest"
+"default": "ghcr.io/yourusername/view-parquet:1.0.1"
 ```
 
 ---
@@ -123,7 +187,7 @@ networking:
 ## `templates/NOTES.txt`
 
 ```txt
-Your Hello EDITO API is being deployed!
+Your Parquet Viewer in R is being deployed!
 
 It will be available on this [link](http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .Values.ingress.hostname }}).
 ```
@@ -162,18 +226,40 @@ envFrom:
 
 ---
 
-# 🚀 Launch in Playground
+## Commit your changes
 
-- Push branch to GitLab
-- Wait for auto-publish (5–10 min)
-- Launch from [EDITO Datalab](https://datalab.dive.edito.eu/)
-- Test endpoint (e.g., `/hello`)
+First install [pre-commit](https://pre-commit.com/)
+
+Run 'make check-format' and it will make sure the formatting is ok
+
+```bash
+make check-format
+```
+
+Commit your changes
+```bash
+# Stage all changes
+git add .
+# Commit the changes with a descriptive message
+git commit -m "Added my awesome service"
+# Push the changes to your branch
+git push origin parquet_viewer_r
+```
 
 ---
 
-# ✅ Production Release
+# 🚀 Launch in Playground
 
-Once tested:
+- Check your commit in the [pipelines] (https://gitlab.mercator-ocean.fr/pub/edito-infra/service-playground/-/pipelines)
+- If successful, Wait for 5–10 min
+- If it fails, check the [pipeline logs]()
+- Launch from [EDITO Datalab](https://datalab.dive.edito.eu/) and open the 'link' to your awesome App!
+
+---
+
+# ✅ Production Release, out of the playground
+
+Once tested and matured:
 
 - Add yourself to `Chart.yaml` as maintainer
 - Submit a Merge Request
@@ -188,3 +274,7 @@ Once tested:
 
 Questions?  
 📧 [edito-infra-dev@mercator-ocean.eu](mailto:edito-infra-dev@mercator-ocean.eu)
+
+Docs
+- [Service Playground README.md](https://gitlab.mercator-ocean.fr/pub/edito-infra/service-playground)
+- [EDITO docs](https://pub.pages.mercator-ocean.fr/edito-infra/edito-tutorials-content/#/Contribution/service-playground)

@@ -166,7 +166,7 @@ Creating Your First GitHub Repository and Pushing Code [Youtube](https://youtu.b
 **Test Your Tutorial**  
   - Verify that the service clones your github, and your tutorial can be run
   - Does it install the right packages? 
-  - Does it produces the outputs you expect?
+  - Does it produce the output(s) you expect?
 
 ---
 
@@ -261,8 +261,7 @@ We will clone this repository and add our tutorial to this list, using the the t
     }
     "deploymentUrl": "https://datalab.dive.edito.eu/mydeployment.configuration.git.resources.etc"// DEPLOYMENT URL FROM PREVIOUS STEP
     // parts: [] 
-},
-
+}
 ```
 
 ---
