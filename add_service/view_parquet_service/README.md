@@ -41,7 +41,7 @@ Run the container exposing port 3838:
 docker run -p 3838:3838 interactive-parquet-viewer
 ```
 
-The Shiny app will be accessible at `http://localhost:3838/parquetviewer/`.
+The Shiny app will be accessible at `http://localhost:3838/`.
 
 ## File Descriptions
 
