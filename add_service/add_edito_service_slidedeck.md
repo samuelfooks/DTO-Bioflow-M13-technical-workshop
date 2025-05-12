@@ -28,9 +28,9 @@ _Flanders Marine Institute (VLIZ)_
 
 ---
 
-# 🧱 Dockerizing Your Script
+# 🧱 Application/Service
 
-## Example: R Markdown → view_parquet.Rmd
+#### [view_parquet.Rmd](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/view_parquet.Rmd)
 
 The `view_parquet.Rmd` script provides an interactive tool to load, filter, and visualize Parquet datasets. It includes:
 
@@ -38,6 +38,9 @@ The `view_parquet.Rmd` script provides an interactive tool to load, filter, and 
 - **Map Visualization**: Display geospatial data (e.g., points, polygons) on an interactive map using `leaflet`.
 - **Download Filtered Data**: Export selected data as a CSV file.
 - **Metadata Schema**: Display the schema of the loaded Parquet dataset.
+
+Is not instructional (Tutorial), and doesn't only perform a specific calculation/run a model (Process).
+We should add it as a service
 
 ---
 
@@ -157,7 +160,7 @@ dependencies:
 
 # 🛠 Update Chart Values
 
-## `values.yaml`
+#### `values.yaml`
 ```yaml
 service:
   image:
@@ -170,10 +173,11 @@ networking:
 
 ---
 
-## Latest image in values.schema.json
+## Update values.schema.json
 
 Choose which version(s) of your package/app that users should be able to select in the User interface
-## `values.schema.json`
+
+#### `values.schema.json`
 ```json
 "listEnum": [
     "ghcr.io/yourusername/view-parquet:1.0.1",
@@ -184,8 +188,12 @@ Choose which version(s) of your package/app that users should be able to select 
 
 ---
 
-## `templates/NOTES.txt`
+## Update templates/NOTES.txt
 
+Can show the link where the service is deployed, link to sample dataset, etc. 
+This will be displayed in the pop-up to the user while the service is being deployed.
+
+#### `templates/NOTES.txt`
 ```txt
 Your Parquet Viewer in R is being deployed!
 

@@ -28,8 +28,8 @@
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" data-header=" 🚧 Under Construction: This document is a work in progress! 🚧" data-theme="edito-tutorials" lang="en-US" data-marpit-pagination="3" style="--paginate:true;--header: 🚧 Under Construction: This document is a work in progress! 🚧;--theme:edito-tutorials;" data-marpit-pagination-total="18">
 <header> <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/> Under Construction: This document is a work in progress! <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/></header>
-<h1 id="%F0%9F%A7%B1-dockerizing-your-script"><img class="emoji" draggable="false" alt="🧱" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f9f1.svg" data-marp-twemoji=""/> Dockerizing Your Script</h1>
-<h2 id="example-r-markdown-%E2%86%92-view_parquetrmd">Example: R Markdown → view_parquet.Rmd</h2>
+<h1 id="%F0%9F%A7%B1-applicationservice"><img class="emoji" draggable="false" alt="🧱" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f9f1.svg" data-marp-twemoji=""/> Application/Service</h1>
+<h4 id="view_parquetrmd"><a href="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/view_parquet.Rmd">view_parquet.Rmd</a></h4>
 <p>The <code>view_parquet.Rmd</code> script provides an interactive tool to load, filter, and visualize Parquet datasets. It includes:</p>
 <ul>
 <li><strong>Interactive Table</strong>: View and filter data using a searchable, paginated table.</li>
@@ -37,6 +37,8 @@
 <li><strong>Download Filtered Data</strong>: Export selected data as a CSV file.</li>
 <li><strong>Metadata Schema</strong>: Display the schema of the loaded Parquet dataset.</li>
 </ul>
+<p>Is not instructional (Tutorial), and doesn't only perform a specific calculation/run a model (Process).<br />
+We should add it as a service</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-paginate="true" data-header=" 🚧 Under Construction: This document is a work in progress! 🚧" data-theme="edito-tutorials" lang="en-US" data-marpit-pagination="4" style="--paginate:true;--header: 🚧 Under Construction: This document is a work in progress! 🚧;--theme:edito-tutorials;" data-marpit-pagination-total="18">
 <header> <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/> Under Construction: This document is a work in progress! <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/></header>
@@ -91,7 +93,7 @@ docker push ghcr.io/yourusername/view_parquet:1.0.1
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-paginate="true" data-header=" 🚧 Under Construction: This document is a work in progress! 🚧" data-theme="edito-tutorials" lang="en-US" data-marpit-pagination="7" style="--paginate:true;--header: 🚧 Under Construction: This document is a work in progress! 🚧;--theme:edito-tutorials;" data-marpit-pagination-total="18">
 <header> <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/> Under Construction: This document is a work in progress! <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/></header>
 <h2 id="test-your-public-image">Test your public image</h2>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">docker run -p 3838:3838 ghcr.io/yourusername/view-parquet:1.0.1
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">docker run -p 3838:3838 ghcr.io/yourusername/view_parquet:1.0.1
 </code></pre>
 <p>Open your browser and navigate to:</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code>http://localhost:3838
@@ -122,17 +124,22 @@ git push origin parquet_viewer_r
 <p>Edit <code>Chart.yaml</code>:</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">view-parquet</span>
 <span class="hljs-attr">description:</span> <span class="hljs-string">An</span> <span class="hljs-string">interactive</span> <span class="hljs-string">Parquet</span> <span class="hljs-string">viewer</span> <span class="hljs-string">on</span> <span class="hljs-string">EDITO</span>
-<span class="hljs-attr">home:</span> <span class="hljs-string">https://github.com/yourusername/view-parquet</span>
+<span class="hljs-attr">home:</span> <span class="hljs-string">https://github.com/yourusername/view_parquet</span>
 <span class="hljs-attr">icon:</span> <span class="hljs-string">https://your.icon.url/icon.png</span>
 <span class="hljs-attr">keywords:</span> [<span class="hljs-string">shiny</span>, <span class="hljs-string">r</span>, <span class="hljs-string">parquet</span>, <span class="hljs-string">viewer</span>]
 <span class="hljs-attr">version:</span> <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
-<span class="hljs-attr">appVersion:</span> <span class="hljs-string">&quot;0.1.0&quot;</span>
+<span class="hljs-attr">appVersion:</span> <span class="hljs-string">&quot;1.0.0&quot;</span>
+<span class="hljs-attr">dependencies:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">library-chart</span>
+    <span class="hljs-attr">version:</span> <span class="hljs-number">1.5</span><span class="hljs-number">.16</span>
+    <span class="hljs-attr">repository:</span> <span class="hljs-string">https://inseefrlab.github.io/helm-charts-interactive-services</span>
+
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-header=" 🚧 Under Construction: This document is a work in progress! 🚧" data-theme="edito-tutorials" lang="en-US" data-marpit-pagination="10" style="--paginate:true;--header: 🚧 Under Construction: This document is a work in progress! 🚧;--theme:edito-tutorials;" data-marpit-pagination-total="18">
 <header> <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/> Under Construction: This document is a work in progress! <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/></header>
 <h1 id="%F0%9F%9B%A0-update-chart-values"><img class="emoji" draggable="false" alt="🛠" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6e0.svg" data-marp-twemoji=""/> Update Chart Values</h1>
-<h2 id="valuesyaml"><code>values.yaml</code></h2>
+<h4 id="valuesyaml"><code>values.yaml</code></h4>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-yaml"><span class="hljs-attr">service:</span>
   <span class="hljs-attr">image:</span>
     <span class="hljs-attr">version:</span> <span class="hljs-string">&quot;ghcr.io/yourusername/view-parquet:1.0.1&quot;</span>
@@ -144,9 +151,9 @@ git push origin parquet_viewer_r
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-header=" 🚧 Under Construction: This document is a work in progress! 🚧" data-theme="edito-tutorials" lang="en-US" data-marpit-pagination="11" style="--paginate:true;--header: 🚧 Under Construction: This document is a work in progress! 🚧;--theme:edito-tutorials;" data-marpit-pagination-total="18">
 <header> <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/> Under Construction: This document is a work in progress! <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/></header>
-<h2 id="latest-image-in-valuesschemajson">Latest image in values.schema.json</h2>
+<h2 id="update-valuesschemajson">Update values.schema.json</h2>
 <p>Choose which version(s) of your package/app that users should be able to select in the User interface</p>
-<h2 id="valuesschemajson"><code>values.schema.json</code></h2>
+<h4 id="valuesschemajson"><code>values.schema.json</code></h4>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-json"><span class="hljs-attr">&quot;listEnum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-string">&quot;ghcr.io/yourusername/view-parquet:1.0.1&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-string">&quot;ghcr.io/yourusername/view-parquet:1.0.0&quot;</span>
@@ -156,7 +163,10 @@ git push origin parquet_viewer_r
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" data-header=" 🚧 Under Construction: This document is a work in progress! 🚧" data-theme="edito-tutorials" lang="en-US" data-marpit-pagination="12" style="--paginate:true;--header: 🚧 Under Construction: This document is a work in progress! 🚧;--theme:edito-tutorials;" data-marpit-pagination-total="18">
 <header> <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/> Under Construction: This document is a work in progress! <img class="emoji" draggable="false" alt="🚧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6a7.svg" data-marp-twemoji=""/></header>
-<h2 id="templatesnotestxt"><code>templates/NOTES.txt</code></h2>
+<h2 id="update-templatesnotestxt">Update templates/NOTES.txt</h2>
+<p>Can show the link where the service is deployed, link to sample dataset, etc.<br />
+This will be displayed in the pop-up to the user while the service is being deployed.</p>
+<h4 id="templatesnotestxt"><code>templates/NOTES.txt</code></h4>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-txt">Your Parquet Viewer in R is being deployed!
 
 It will be available on this [link](http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .Values.ingress.hostname }}).
