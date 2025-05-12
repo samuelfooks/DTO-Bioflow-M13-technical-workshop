@@ -30,6 +30,7 @@ _Flanders Marine Institute (VLIZ)_
 
 # 🧱 Application/Service
 
+## [view_parquet_service](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/)
 #### [view_parquet.Rmd](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/view_parquet.Rmd)
 
 The `view_parquet.Rmd` script provides an interactive tool to load, filter, and visualize Parquet datasets. It includes:
