@@ -91,7 +91,7 @@ Build and version your container using semantic versioning [docs](https://semver
 Not technically required, but if your new version fails, roll back easily.
 
 ```bash
-docker build -t ghcr.io/yourusername/view_parquet:1.0.0 .
+docker build -t ghcr.io/yourusername/view_parquet:1.0.1 .
 
 export CR_PAT = mycontainerregistrytoken
 
@@ -137,9 +137,43 @@ cp -r terria-map-viewer parquet_viewer_r
 
 ---
 
-## Chart.yaml
+## Helm and Kubernetes Overview
 
-Basic outline for deployment
+### [Kubernetes](https://kubernetes.io/docs/concepts/)
+- [**Pods**](https://kubernetes.io/docs/concepts/workloads/pods/): Smallest deployable units in Kubernetes, running one or more containers.
+- [**Cluster**](https://kubernetes.io/docs/concepts/architecture/): A group of nodes (machines) managed by Kubernetes.
+- [**Service**](https://kubernetes.io/docs/concepts/services-networking/service/): Exposes your application to the network, enabling communication. (Not to be confused with the predefined datalab deployment services)
+
+### Helm
+- [**Helm Charts**](https://helm.sh/docs/intro/using_helm/): Pre-configured Kubernetes resources packaged together.
+- [**Templates**](https://helm.sh/docs/chart_template_guide/getting_started/): YAML files with placeholders for dynamic values.
+- [**Values**](https://helm.sh/docs/chart_template_guide/values_files/): Configuration file (`values.yaml`) to customize deployments.
+
+---
+
+## Basic Helm Template Example
+
+#### Chart.yaml
+```yaml
+name: my-service
+version: 1.0.0
+description: A sample Helm chart
+```
+
+#### values.yaml
+```yaml
+image:
+  repository: my-docker-repo/my-service
+  tag: "1.0.0"
+service:
+  type: ClusterIP
+  port: 8080
+```
+
+---
+
+## Let's edit our Chart.yaml
+
 
 Edit `Chart.yaml`:
 ```yaml
@@ -159,7 +193,7 @@ dependencies:
 
 ---
 
-# 🛠 Update Chart Values
+## 🛠 Let's update values.yaml
 
 #### `values.yaml`
 ```yaml
@@ -174,9 +208,13 @@ networking:
 
 ---
 
-## Update values.schema.json
+## The additional values.schema.json
 
-Choose which version(s) of your package/app that users should be able to select in the User interface
+Inputs from the user interface go into here, and this goes with the Helm chart deployment into the cluster.
+- app version
+- resources
+
+Ex. Let users select different versions of your app
 
 #### `values.schema.json`
 ```json
@@ -214,6 +252,8 @@ In `values.schema.json`, allow user-defined ingress:
 // Remove "hidden": true line
 ```
 
+For more details, refer to the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/).
+
 ---
 
 # 🔒 Add S3 or Marine Service Secrets (Optional)
@@ -232,6 +272,8 @@ envFrom:
 - secretRef:
     name: {{ include "library-chart.secretNameS3" . }}
 ```
+
+For more details, refer to the [Kubernetes Secrets documentation](https://kubernetes.io/docs/concepts/configuration/secret/).
 
 ---
 
