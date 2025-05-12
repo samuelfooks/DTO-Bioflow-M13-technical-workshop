@@ -10,6 +10,14 @@ This project provides an interactive tool to read and visualize Parquet files us
 - **CSV Export**: Download filtered data as a CSV file.
 - **Custom Parquet URL Input**: Users can now input their own Parquet file URL directly in the app without a default value.
 
+## Modularized Structure
+
+The app is now organized into three main components:
+
+- **UI (`ui.R`)**: Defines the user interface layout and components.
+- **Server (`server.R`)**: Implements the server-side logic for data processing and visualization.
+- **Global (`global.R`)**: Contains shared resources and configurations used across the app.
+
 ## Requirements
 
 - Docker installed on your system.
@@ -21,7 +29,6 @@ This project provides an interactive tool to read and visualize Parquet files us
 Navigate to the `view_parquet_service` directory and build the Docker image:
 
 ```bash
-
 cd add_service/view_parquet_service
 docker build -t interactive-parquet-viewer .
 ```
@@ -34,25 +41,25 @@ Run the container exposing port 3838:
 docker run -p 3838:3838 interactive-parquet-viewer
 ```
 
-The Shiny app will be accessible at `http://localhost:3838`.
+The Shiny app will be accessible at `http://localhost:3838/parquetviewer/`.
 
 ## File Descriptions
 
-### `view_parquet.Rmd`
+### `ui.R`
+Defines the layout and components of the user interface.
 
-This R Markdown file contains the Shiny app code. It includes:
+### `server.R`
+Implements the logic for loading, filtering, and visualizing Parquet data.
 
-- **UI Code**: Defines the layout and components of the app.
-- **Server Code**: Implements the logic for loading, filtering, and visualizing Parquet data.
-- **Helper Functions**: Includes a function to load Parquet files from S3 URLs.
+### `global.R`
+Contains shared resources and configurations used across the app.
 
 ### `Dockerfile`
-
 The Dockerfile sets up the environment to run the Shiny app. It:
 
 1. Uses the `rocker/shiny:4.5.0` base image.
 2. Installs required system dependencies and R packages.
-3. Copies the `view_parquet.Rmd` file into the container.
+3. Copies the app files (`ui.R`, `server.R`, `global.R`) into the container.
 4. Exposes port 3838 and runs the Shiny app.
 
 ## Parquet File
@@ -71,4 +78,4 @@ otherperson@mail.com
 
 ## License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.

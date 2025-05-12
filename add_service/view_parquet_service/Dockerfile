@@ -1,6 +1,6 @@
 FROM rocker/shiny:4.5.0
 
-# Install required system dependencies for R packages
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
@@ -20,11 +20,16 @@ RUN apt-get update && apt-get install -y \
 # Install required R packages
 RUN R -e "install.packages(c('shiny', 'arrow', 'leaflet', 'DT', 'dplyr', 'sf', 'leaflet.extras', 'shinythemes'))"
 
-# Copy the R Markdown file to the container
-COPY view_parquet.Rmd /srv/shiny-server/view_parquet.Rmd
+# Create app folder and copy files
+RUN mkdir -p /srv/shiny-server
+COPY ui.R server.R global.R /srv/shiny-server/
 
-# Expose the port for the Shiny app
+# Copy the startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Expose port
 EXPOSE 3838
 
-# Run the Shiny app
-CMD ["R", "-e", "rmarkdown::run('/srv/shiny-server/view_parquet.Rmd', shiny_args = list(host = '0.0.0.0', port = 3838))"]
+# Start Shiny server
+CMD ["/start.sh"]

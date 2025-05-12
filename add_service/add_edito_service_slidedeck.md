@@ -29,16 +29,15 @@ _Flanders Marine Institute (VLIZ)_
 
 # 🧱 Application/Service
 
-## [view_parquet_service](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/)
-#### [view_parquet.Rmd](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/view_parquet.Rmd)
+### [view_parquet_service](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/)
 
-The `view_parquet.Rmd` script provides an interactive tool to load, filter, and visualize Parquet datasets. It includes:
+The `view_parquet_service`:
 
-- **Interactive Table**: View and filter data using a searchable, paginated table.
-- **Map Visualization**: Display geospatial data (e.g., points, polygons) on an interactive map using `leaflet`.
-- **Download Filtered Data**: Export selected data as a CSV file.
-- **Metadata Schema**: Display the schema of the loaded Parquet dataset.
+- **[`ui.R`](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/ui.R)**
+- **[`server.R`](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/server.R)**
+- **[`global.R`](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/global.R)**
 
+These files collectively provide an interactive tool to load, filter, and visualize Parquet datasets
 Is not instructional (Tutorial), and doesn't only perform a specific calculation/run a model (Process).
 We should add it as a service
 
@@ -65,13 +64,22 @@ RUN apt-get update && apt-get install -y \
     libtiff5-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Install required R packages
 RUN R -e "install.packages(c('shiny', 'arrow', 'leaflet', 'DT', 'dplyr', 'sf', 'leaflet.extras', 'shinythemes'))"
 
-COPY view_parquet.Rmd /srv/shiny-server/view_parquet.Rmd
+# Create app folder and copy files
+RUN mkdir -p /srv/shiny-server
+COPY ui.R server.R global.R /srv/shiny-server/
 
+# Copy the startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Expose port
 EXPOSE 3838
 
-CMD ["R", "-e", "rmarkdown::run('/srv/shiny-server/view_parquet.Rmd', shiny_args = list(host = '0.0.0.0', port = 3838))"]
+# Start Shiny server
+CMD ["/start.sh"]
 ```
 
 ---
@@ -103,13 +111,15 @@ docker push ghcr.io/yourusername/view_parquet:1.0.1
 
 ## Test your public image
 
+Test the public image before adding it as a service
+
 ```bash
-docker run -p 3838:3838 ghcr.io/yourusername/view_parquet:1.0.1
+docker run -p 3838:3838 ghcr.io/samuelfooks/view_parquet:1.0.3
 ```
 
 Open your browser and navigate to:
 ```
-http://localhost:3838
+http://localhost:3838/
 ```
 
 Your working app version is now usable by anyone, anywhere with Docker and an internet connection
@@ -166,7 +176,7 @@ image:
   tag: "1.0.0"
 service:
   type: ClusterIP
-  port: 8080
+  port: 3838
 ```
 
 ---
@@ -182,7 +192,7 @@ home: https://github.com/yourusername/view_parquet
 icon: https://your.icon.url/icon.png
 keywords: [shiny, r, parquet, viewer]
 version: 1.0.0
-appVersion: "1.0.0"
+appVersion: "1.0.3"
 dependencies:
   - name: library-chart
     version: 1.5.16
@@ -198,7 +208,7 @@ dependencies:
 ```yaml
 service:
   image:
-    version: "ghcr.io/yourusername/view-parquet:1.0.1"
+    version: "ghcr.io/yourusername/view-parquet:1.0.3"
             
 networking:
   service:
@@ -218,10 +228,10 @@ Ex. Let users select different versions of your app
 #### `values.schema.json`
 ```json
 "listEnum": [
-    "ghcr.io/yourusername/view-parquet:1.0.1",
-    "ghcr.io/yourusername/view-parquet:1.0.0"
+    "ghcr.io/yourusername/view-parquet:1.0.3",
+    "ghcr.io/yourusername/view-parquet:1.0.1"
 ],
-"default": "ghcr.io/yourusername/view-parquet:1.0.1"
+"default": "ghcr.io/yourusername/view-parquet:1.0.3"
 ```
 
 ---

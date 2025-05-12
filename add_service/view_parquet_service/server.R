@@ -1,118 +1,9 @@
----
-title: "Interactive Parquet Viewer"
-author: "Sam"
-output: 
-  html_document:
-    self_contained: false
-runtime: shiny
-description: "Interactive tool to read and plot Parquet files using R"
-editor_options: 
-  chunk_output_type: inline
-  highlight: "zenburn"
-  theme: "default"
-  line_numbers: TRUE
-  prompt: FALSE
-  width: 100%
-  height: 100%
-  font_size: 12
-  font_family: "Courier New"
-date: "`r Sys.Date()`"
----
-
-```{r setup, include=FALSE}
-if (!requireNamespace("arrow", quietly = TRUE)) install.packages("arrow")
-if (!requireNamespace("leaflet", quietly = TRUE)) install.packages("leaflet")
-if (!requireNamespace("DT", quietly = TRUE)) install.packages("DT")
-if (!requireNamespace("dplyr", quietly = TRUE)) install.packages("dplyr")
-if (!requireNamespace("sf", quietly = TRUE)) install.packages("sf")
-if (!requireNamespace("leaflet.extras", quietly = TRUE)) install.packages("leaflet.extras")
-if (!requireNamespace("shinythemes", quietly = TRUE)) install.packages("shinythemes")
-library(shiny)
-library(arrow)
-library(leaflet)
-library(DT)
-library(dplyr)
-library(sf)
-library(leaflet.extras)
-library(shinythemes)
-
-```
-
-<details>
-<summary><strong>Show/hide function to open Parquet file</strong></summary>
-```{r open-parquet-function}
-# Function to open a Parquet dataset from an S3 URL
-open_my_parquet <- function(s3_url) {
-  temp <- strsplit(s3_url, "//")[[1]][2]
-  endpoint <- strsplit(temp, "/")[[1]][1]
-  data_path <- sub(paste0(endpoint, "/"), "", temp)
-  data_lake <- S3FileSystem$create(anonymous = TRUE, scheme = "https", endpoint_override = endpoint)
-
-  dataset <- NULL
-  tryCatch({
-    dataset <- arrow::open_dataset(data_path, filesystem = data_lake, format = "parquet")
-  }, error = function(e) {
-    cat("Error loading dataset:", e$message, "\n")
-  })
-  return(dataset)
-}
-```
-
-</details>
-
-<details>
-<summary><strong>Show/hide UI code</strong></summary>
-```{r ui}
-ui <- fluidPage(
-  theme = shinythemes::shinytheme("flatly"),  # Add theme
-  tags$head(
-    tags$style(HTML("
-      body { font-size: 16px; }
-      .sidebar-panel { font-size: 16px; }
-      .form-control { font-size: 16px; }
-      .btn { font-size: 16px; padding: 10px 20px; }
-      .tab-content { padding-top: 15px; }
-    "))
-  ),
-  
-  titlePanel("🧭 Interactive Parquet Viewer"),
-
-  fluidRow(
-    column(
-      width = 3,
-      wellPanel(
-        textInput("parquet_url", "Enter Parquet File URL:", 
-                  value = ""),
-        actionButton("load_data", "📥 Load Data"),
-        actionButton("update_map", "🗺️ Put Filtered Data on Map"),
-        downloadButton("download_data", "💾 Download CSV"),
-        hr(),
-        h4("🧬 Metadata Schema"),
-        verbatimTextOutput("schema_output")
-      )
-    ),
-    
-    column(
-      width = 9,
-      tabsetPanel(
-        tabPanel("📋 Interactive Table", DTOutput("data_table")),
-        tabPanel("🗺️ Map", leafletOutput("map", height = "700px"))
-      )
-    )
-  )
-)
-```
-
-</details>
-
-<details>
-<summary><strong>Show/hide server code</strong></summary>
-
-```{r server}
+# server.R
 server <- function(input, output, session) {
   parquet_data <- reactiveVal(NULL)
   filtered_data <- reactiveVal(NULL)
   map_data <- reactiveVal(NULL)
+
   observeEvent(input$load_data, {
     req(input$parquet_url)
     tryCatch({
@@ -125,9 +16,11 @@ server <- function(input, output, session) {
       showNotification(paste("Error loading dataset:", e$message), type = "error")
     })
   })
+
   observeEvent(input$update_map, {
     map_data(table_selected_data())
   })
+
   output$data_table <- renderDT({
     req(filtered_data())
     df <- filtered_data()
@@ -142,7 +35,6 @@ server <- function(input, output, session) {
               filter = "top", selection = "multiple", rownames = FALSE)
   })
 
-  # Reactive for table filtered subset
   table_filtered_data <- reactive({
     req(filtered_data())
     df <- filtered_data()
@@ -153,7 +45,6 @@ server <- function(input, output, session) {
     }
   })
 
-  # Reactive for selected rows from filtered data
   table_selected_data <- reactive({
     rows <- input$data_table_rows_selected
     if (!is.null(rows) && length(rows) > 0) {
@@ -182,13 +73,13 @@ server <- function(input, output, session) {
 
       sf_data <- st_simplify(sf_data, dTolerance = 0.01)
       popup_text <- apply(
-      sf_data %>% st_drop_geometry(),
-      1,
-      function(row) paste0("<b>", names(row), ":</b> ", as.character(row), collapse = "<br>")
-    )
+        sf_data %>% st_drop_geometry(),
+        1,
+        function(row) paste0("<b>", names(row), ":</b> ", as.character(row), collapse = "<br>")
+      )
       polygon_data <- sf_data[st_geometry_type(sf_data) %in% c("POLYGON", "MULTIPOLYGON"), ]
       point_data <- sf_data[st_geometry_type(sf_data) %in% c("POINT", "MULTIPOINT"), ]
-      
+
       leaflet_map <- leaflet() %>% addTiles()
 
       if (nrow(polygon_data) > 0) {
@@ -204,10 +95,10 @@ server <- function(input, output, session) {
       if (nrow(point_data) > 0) {
         leaflet_map <- leaflet_map %>%
           addCircleMarkers(data = point_data, 
-                          radius = 5, 
-                          color = "red", 
-                          group = "Points",
-                          popup = popup_text[match(st_as_text(st_geometry(point_data)), st_as_text(st_geometry(sf_data)))])
+                           radius = 5, 
+                           color = "red", 
+                           group = "Points",
+                           popup = popup_text[match(st_as_text(st_geometry(point_data)), st_as_text(st_geometry(sf_data)))])
       }
 
       leaflet_map %>%
@@ -238,7 +129,3 @@ server <- function(input, output, session) {
   )
 }
 
-shinyApp(ui, server)
-```
-
-</details>
