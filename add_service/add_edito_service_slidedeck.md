@@ -4,7 +4,6 @@ paginate: true
 theme: edito-tutorials
 title: Deploying a Dockerized Service to EDITO
 description: From Script to Web Service on the EDITO Datalab
-header: " 🚧 Under Construction: This document is a work in progress! 🚧"
 ---
 
 # 👋 Welcome!

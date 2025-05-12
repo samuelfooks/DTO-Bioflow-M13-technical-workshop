@@ -4,7 +4,7 @@ This repository provides resources and guidelines for contributing to the EDITO 
 
 - **Add a Tutorial**: Learn how to create and contribute tutorials to the EDITO platform.
 - **Explore the Data API**: Understand how to interact with and explore the EDITO Data API.
-- **Under Construction** **Add a Service**: Learn how to add custom services to the EDITO platform. 
+- **Add a Service**: Learn how to add custom services to the EDITO platform. 
 
 ## Repository Structure
 
