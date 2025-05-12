@@ -260,7 +260,7 @@ git push origin parquet_viewer_r
 
 - Check your commit in the [pipelines] (https://gitlab.mercator-ocean.fr/pub/edito-infra/service-playground/-/pipelines)
 - If successful, Wait for 5–10 min
-- If it fails, check the [pipeline logs]()
+- If it fails, check the [pipeline logs](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/addservice-failedcommit.png?raw=true)
 - Launch from [EDITO Datalab](https://datalab.dive.edito.eu/) and open the 'link' to your awesome App!
 
 ---
