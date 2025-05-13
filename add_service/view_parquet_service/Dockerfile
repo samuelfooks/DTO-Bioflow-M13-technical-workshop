@@ -22,10 +22,10 @@ RUN R -e "install.packages(c('shiny', 'arrow', 'leaflet', 'DT', 'dplyr', 'sf', '
 
 # Create app folder and copy files
 RUN mkdir -p /srv/shiny-server
-COPY ui.R server.R global.R /srv/shiny-server/
+COPY app/ui.R app/server.R app/global.R /srv/shiny-server/
 
 # Copy the startup script
-COPY start.sh /start.sh
+COPY app/start_app.sh /start.sh
 RUN chmod +x /start.sh
 
 # Expose port

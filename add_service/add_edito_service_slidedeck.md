@@ -31,11 +31,11 @@ _Flanders Marine Institute (VLIZ)_
 
 ### [view_parquet_service](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/)
 
-The `view_parquet_service`:
+The `view_parquet_service/app`:
 
-- **[`ui.R`](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/ui.R)**
-- **[`server.R`](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/server.R)**
-- **[`global.R`](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/global.R)**
+- **[`ui.R`](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/app/ui.R)**
+- **[`server.R`](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/app/server.R)**
+- **[`global.R`](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/add_service/view_parquet_service/app/global.R)**
 
 These files collectively provide an interactive tool to load, filter, and visualize Parquet datasets
 Is not instructional (Tutorial), and doesn't only perform a specific calculation/run a model (Process).
@@ -48,6 +48,7 @@ We should add it as a service
 ```Dockerfile
 FROM rocker/shiny:4.5.0
 
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
@@ -69,10 +70,10 @@ RUN R -e "install.packages(c('shiny', 'arrow', 'leaflet', 'DT', 'dplyr', 'sf', '
 
 # Create app folder and copy files
 RUN mkdir -p /srv/shiny-server
-COPY ui.R server.R global.R /srv/shiny-server/
+COPY app/ui.R app/server.R app/global.R /srv/shiny-server/
 
 # Copy the startup script
-COPY start.sh /start.sh
+COPY app/start_app.sh /start.sh
 RUN chmod +x /start.sh
 
 # Expose port
@@ -80,6 +81,7 @@ EXPOSE 3838
 
 # Start Shiny server
 CMD ["/start.sh"]
+
 ```
 
 ---
@@ -114,7 +116,7 @@ docker push ghcr.io/yourusername/view_parquet:1.0.1
 Test the public image before adding it as a service
 
 ```bash
-docker run -p 3838:3838 ghcr.io/samuelfooks/view_parquet:1.0.3
+docker run -p 3838:3838 ghcr.io/samuelfooks/view_parquet:1.0.4
 ```
 
 Open your browser and navigate to:
