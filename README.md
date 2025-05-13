@@ -53,6 +53,12 @@ To work with this repository and generate documentation locally, ensure you have
 - **Docker**: (Optional) To run services using `docker-compose`.
 - **inotify-tools**: (Optional) To run `watch_presentations.sh` for live updates.
 
+## Presentations
+
+The slide decks are rendered using Marp into presentations, hosted on pages of this repository
+
+https://samuelfooks.github.io/DTO-Bioflow-M13-technical-workshop/
+
 ## Contributions
 
 We welcome contributions! Please read the `add_tutorial/`, `add_service/`, and `explore_data/` directories for detailed guidelines on how to contribute effectively.
