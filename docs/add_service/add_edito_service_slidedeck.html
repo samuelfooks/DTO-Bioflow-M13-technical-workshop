@@ -40,6 +40,7 @@ We should add it as a service</p>
 <h2 id="dockerfile-example">Dockerfile Example</h2>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> rocker/shiny:<span class="hljs-number">4.5</span>.<span class="hljs-number">0</span>
 
+<span class="hljs-comment"># Install system dependencies</span>
 <span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
@@ -61,10 +62,10 @@ We should add it as a service</p>
 
 <span class="hljs-comment"># Create app folder and copy files</span>
 <span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">mkdir</span> -p /srv/shiny-server</span>
-<span class="hljs-keyword">COPY</span><span class="language-bash"> ui.R server.R global.R /srv/shiny-server/</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> app/ui.R app/server.R app/global.R /srv/shiny-server/</span>
 
 <span class="hljs-comment"># Copy the startup script</span>
-<span class="hljs-keyword">COPY</span><span class="language-bash"> start.sh /start.sh</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> app/start_app.sh /start.sh</span>
 <span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">chmod</span> +x /start.sh</span>
 
 <span class="hljs-comment"># Expose port</span>
@@ -72,6 +73,7 @@ We should add it as a service</p>
 
 <span class="hljs-comment"># Start Shiny server</span>
 <span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;/start.sh&quot;</span>]</span>
+
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-paginate="true" data-theme="edito-tutorials" lang="en-US" data-marpit-pagination="5" style="--paginate:true;--theme:edito-tutorials;" data-marpit-pagination-total="20">
