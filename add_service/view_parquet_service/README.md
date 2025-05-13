@@ -33,6 +33,7 @@ To run the app locally in RStudio:
    ```
 4. Run the app using the provided R script:
    ```R
+   library(shiny)
    runApp('run_local.R')
    ```
 
