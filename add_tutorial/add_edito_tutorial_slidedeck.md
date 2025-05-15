@@ -157,7 +157,7 @@ Creating Your First GitHub Repository and Pushing Code [Youtube](https://youtu.b
 **Save the Configuration**  
   - Click **Save** to store your settings. 
 
-**Copy the URL in your brower**
+**Copy the URL in your brower**[deployment_url](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/deploymenturl.png?raw=true)
   - This is the link used to deploy your service and clone your github into the service
 
 **Launch the Service**  
