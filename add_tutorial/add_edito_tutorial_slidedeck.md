@@ -267,7 +267,10 @@ We will clone this repository and add our tutorial to this list, using the the t
 ---
 
 ### [Adding to tutorials.json](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/videos/addtutorialjson.mp4?raw=true)
-  <video src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/videos/addtutorialjson.mp4?raw=true" controls width="800"></video>
+
+Ex. A tutorial on accessing data via STAC in R and how to subset ARCO data.
+
+<video src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/videos/addtutorialjson.mp4?raw=true" controls width="800"></video>
 
 ---
 
