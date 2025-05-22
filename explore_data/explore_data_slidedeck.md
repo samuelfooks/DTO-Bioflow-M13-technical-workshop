@@ -13,6 +13,8 @@ Learn to explore, search, and use marine data from the EDITO Data Lake
 
 👨‍🏫 Presented by Samuel Fooks (VLIZ)
 
+**For all the PDFs and code, check out the workshop [GitHub repository](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/tree/main)**
+
 ---
 
 # 🌍 What is EDITO?

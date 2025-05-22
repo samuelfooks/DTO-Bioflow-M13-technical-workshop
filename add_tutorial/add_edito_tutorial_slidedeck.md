@@ -13,9 +13,16 @@ class: lead
 
 Learn how to contribute your knowledge to [**EDITO Tutorials** ](https://dive.edito.eu/training).
 
-<img src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/editotutorialspage.png?raw=true">Tutorials</img>
 Presented by **Samuel Fooks**  
 _Flanders Marine Institute (VLIZ)_
+
+**For all the PDFs and code, check out the workshop [GitHub repository](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/tree/main)**
+
+---
+
+## Adding our tutorial to the [**EDITO Tutorials** ](https://dive.edito.eu/training)
+
+<img src="https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/blob/main/assets/images/editotutorialspage.png?raw=true">Tutorials</img>
 
 ---
 

@@ -15,6 +15,8 @@ Learn how to turn your script into a containerized web service and launch it on 
 By **Samuel Fooks**  
 _Flanders Marine Institute (VLIZ)_
 
+**For all the PDFs and code, check out the workshop [GitHub repository](https://github.com/samuelfooks/DTO-Bioflow-M13-technical-workshop/tree/main)**
+
 ---
 
 # 🎯 What You'll Learn
